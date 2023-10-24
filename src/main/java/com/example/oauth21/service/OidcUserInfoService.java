@@ -3,10 +3,12 @@ package com.example.oauth21.service;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author kevin
+ */
 @Service
 public class OidcUserInfoService {
 
