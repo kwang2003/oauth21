@@ -1,489 +1,480 @@
-2023-10-24 21:26:40.892 [restartedMain] INFO  c.example.oauth21.Oauth21Application - Starting Oauth21Application using Java 17.0.6 with PID 7254 (/Users/kevin/Documents/study_workspace/oauth21/target/classes started by kevin in /Users/kevin/Documents/study_workspace/oauth21)
-2023-10-24 21:26:40.897 [restartedMain] INFO  c.example.oauth21.Oauth21Application - The following 1 profile is active: "dev"
-2023-10-24 21:26:40.919 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-10-24 21:26:40.919 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-10-24 21:26:41.242 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2023-10-24 21:26:41.243 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-10-24 21:26:41.260 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
-2023-10-24 21:26:41.571 [restartedMain] WARN  io.undertow.websockets.jsr - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
-2023-10-24 21:26:41.581 [restartedMain] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
-2023-10-24 21:26:41.581 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 662 ms
-2023-10-24 21:26:41.738 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authorizationServerSecurityFilterChain' defined in class path resource [com/example/oauth21/config/AuthorizationServerConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'authorizationServerSecurityFilterChain' threw exception with message: authorizationService cannot be null
-2023-10-24 21:26:41.744 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2023-10-24 21:26:41.752 [restartedMain] ERROR o.s.boot.SpringApplication - Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authorizationServerSecurityFilterChain' defined in class path resource [com/example/oauth21/config/AuthorizationServerConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'authorizationServerSecurityFilterChain' threw exception with message: authorizationService cannot be null
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:654)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:642)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1332)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1162)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:973)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:950)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:616)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:738)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:440)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.example.oauth21.Oauth21Application.main(Oauth21Application.java:15)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'authorizationServerSecurityFilterChain' threw exception with message: authorizationService cannot be null
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:171)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:650)
-	... 24 common frames omitted
-Caused by: java.lang.IllegalArgumentException: authorizationService cannot be null
-	at org.springframework.util.Assert.notNull(Assert.java:204)
-	at com.example.oauth21.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationProvider.<init>(OAuth2ResourceOwnerPasswordAuthenticationProvider.java:73)
-	at com.example.oauth21.config.AuthorizationServerConfig.addCustomOAuth2ResourceOwnerPasswordAuthenticationProvider(AuthorizationServerConfig.java:148)
-	at com.example.oauth21.config.AuthorizationServerConfig.authorizationServerSecurityFilterChain(AuthorizationServerConfig.java:91)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:139)
-	... 25 common frames omitted
-2023-10-24 21:27:25.389 [restartedMain] INFO  c.example.oauth21.Oauth21Application - Starting Oauth21Application using Java 17.0.6 with PID 7385 (/Users/kevin/Documents/study_workspace/oauth21/target/classes started by kevin in /Users/kevin/Documents/study_workspace/oauth21)
-2023-10-24 21:27:25.390 [restartedMain] INFO  c.example.oauth21.Oauth21Application - The following 1 profile is active: "dev"
-2023-10-24 21:27:25.410 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-10-24 21:27:25.411 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-10-24 21:27:25.710 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2023-10-24 21:27:25.711 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-10-24 21:27:25.725 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
-2023-10-24 21:27:25.997 [restartedMain] WARN  io.undertow.websockets.jsr - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
-2023-10-24 21:27:26.006 [restartedMain] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
-2023-10-24 21:27:26.006 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 595 ms
-2023-10-24 21:27:26.154 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authorizationServerSecurityFilterChain' defined in class path resource [com/example/oauth21/config/AuthorizationServerConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'authorizationServerSecurityFilterChain' threw exception with message: authorizationService cannot be null
-2023-10-24 21:27:26.160 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2023-10-24 21:27:26.168 [restartedMain] ERROR o.s.boot.SpringApplication - Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authorizationServerSecurityFilterChain' defined in class path resource [com/example/oauth21/config/AuthorizationServerConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'authorizationServerSecurityFilterChain' threw exception with message: authorizationService cannot be null
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:654)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:642)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1332)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1162)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:973)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:950)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:616)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:738)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:440)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.example.oauth21.Oauth21Application.main(Oauth21Application.java:15)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'authorizationServerSecurityFilterChain' threw exception with message: authorizationService cannot be null
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:171)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:650)
-	... 24 common frames omitted
-Caused by: java.lang.IllegalArgumentException: authorizationService cannot be null
-	at org.springframework.util.Assert.notNull(Assert.java:204)
-	at com.example.oauth21.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationProvider.<init>(OAuth2ResourceOwnerPasswordAuthenticationProvider.java:73)
-	at com.example.oauth21.config.AuthorizationServerConfig.addCustomOAuth2ResourceOwnerPasswordAuthenticationProvider(AuthorizationServerConfig.java:150)
-	at com.example.oauth21.config.AuthorizationServerConfig.authorizationServerSecurityFilterChain(AuthorizationServerConfig.java:141)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:139)
-	... 25 common frames omitted
-2023-10-24 21:28:25.994 [restartedMain] INFO  c.example.oauth21.Oauth21Application - Starting Oauth21Application using Java 17.0.6 with PID 7545 (/Users/kevin/Documents/study_workspace/oauth21/target/classes started by kevin in /Users/kevin/Documents/study_workspace/oauth21)
-2023-10-24 21:28:25.994 [restartedMain] INFO  c.example.oauth21.Oauth21Application - The following 1 profile is active: "dev"
-2023-10-24 21:28:26.015 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-10-24 21:28:26.015 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-10-24 21:28:26.319 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2023-10-24 21:28:26.320 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-10-24 21:28:26.334 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
-2023-10-24 21:28:26.616 [restartedMain] WARN  io.undertow.websockets.jsr - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
-2023-10-24 21:28:26.625 [restartedMain] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
-2023-10-24 21:28:26.625 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 609 ms
-2023-10-24 21:31:30.136 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authorizationServerSecurityFilterChain' defined in class path resource [com/example/oauth21/config/AuthorizationServerConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'authorizationServerSecurityFilterChain' threw exception with message: authorizationService cannot be null
-2023-10-24 21:31:30.143 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2023-10-24 21:31:30.153 [restartedMain] ERROR o.s.boot.SpringApplication - Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authorizationServerSecurityFilterChain' defined in class path resource [com/example/oauth21/config/AuthorizationServerConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'authorizationServerSecurityFilterChain' threw exception with message: authorizationService cannot be null
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:654)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:642)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1332)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1162)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:973)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:950)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:616)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:738)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:440)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
-	at com.example.oauth21.Oauth21Application.main(Oauth21Application.java:15)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'authorizationServerSecurityFilterChain' threw exception with message: authorizationService cannot be null
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:171)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:650)
-	... 24 common frames omitted
-Caused by: java.lang.IllegalArgumentException: authorizationService cannot be null
-	at org.springframework.util.Assert.notNull(Assert.java:204)
-	at com.example.oauth21.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationProvider.<init>(OAuth2ResourceOwnerPasswordAuthenticationProvider.java:73)
-	at com.example.oauth21.config.AuthorizationServerConfig.addCustomOAuth2ResourceOwnerPasswordAuthenticationProvider(AuthorizationServerConfig.java:148)
-	at com.example.oauth21.config.AuthorizationServerConfig.authorizationServerSecurityFilterChain(AuthorizationServerConfig.java:91)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:139)
-	... 25 common frames omitted
-2023-10-24 21:31:32.327 [restartedMain] INFO  c.example.oauth21.Oauth21Application - Starting Oauth21Application using Java 17.0.6 with PID 8040 (/Users/kevin/Documents/study_workspace/oauth21/target/classes started by kevin in /Users/kevin/Documents/study_workspace/oauth21)
-2023-10-24 21:31:32.328 [restartedMain] INFO  c.example.oauth21.Oauth21Application - The following 1 profile is active: "dev"
-2023-10-24 21:31:32.349 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-10-24 21:31:32.349 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-10-24 21:31:32.649 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2023-10-24 21:31:32.651 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-10-24 21:31:32.664 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
-2023-10-24 21:31:32.938 [restartedMain] WARN  io.undertow.websockets.jsr - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
-2023-10-24 21:31:32.946 [restartedMain] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
-2023-10-24 21:31:32.946 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 597 ms
-2023-10-24 21:31:41.017 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2023-10-24 21:31:41.188 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5ab42f41
-2023-10-24 21:31:41.189 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2023-10-24 21:31:41.368 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5b54843a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3764df70, org.springframework.security.web.context.SecurityContextHolderFilter@2ae1c70c, org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.AuthorizationServerContextFilter@2c9892bf, org.springframework.security.web.header.HeaderWriterFilter@19299721, org.springframework.security.web.csrf.CsrfFilter@78e5a4e1, org.springframework.security.oauth2.server.authorization.oidc.web.OidcLogoutEndpointFilter@68eb2017, org.springframework.security.web.authentication.logout.LogoutFilter@5b6a04b1, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationServerMetadataEndpointFilter@558a7f89, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter@40f31b1e, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceVerificationEndpointFilter@641c4bfc, org.springframework.security.oauth2.server.authorization.oidc.web.OidcProviderConfigurationEndpointFilter@43478267, org.springframework.security.oauth2.server.authorization.web.NimbusJwkSetEndpointFilter@59f52b02, org.springframework.security.oauth2.server.authorization.web.OAuth2ClientAuthenticationFilter@47bc563b, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@27397cbc, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@71da5a23, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@7b74ce78, org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter@36bcd490, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@622b93bb, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@104c868a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1649b03a, org.springframework.security.web.access.ExceptionTranslationFilter@66367f93, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenEndpointFilter@75765159, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenIntrospectionEndpointFilter@4166d6bf, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenRevocationEndpointFilter@35399ea7, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceAuthorizationEndpointFilter@307a9d5, org.springframework.security.oauth2.server.authorization.oidc.web.OidcUserInfoEndpointFilter@47f2586a]
-2023-10-24 21:31:41.467 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@373f37f6, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@62a6272e, org.springframework.security.web.context.SecurityContextHolderFilter@259dcac3, org.springframework.security.web.header.HeaderWriterFilter@18dd288c, org.springframework.security.web.csrf.CsrfFilter@7ac4eb7c, org.springframework.security.web.authentication.logout.LogoutFilter@46f93d30, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@30e57700, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@22ff28d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@75e455d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@78df4a07, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7c11ebc8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@79e0110d, org.springframework.security.web.access.ExceptionTranslationFilter@5f6b6430, org.springframework.security.web.access.intercept.AuthorizationFilter@25e51a33]
-2023-10-24 21:31:41.697 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
-2023-10-24 21:31:41.709 [restartedMain] INFO  io.undertow - starting server: Undertow - 2.3.10.Final
-2023-10-24 21:31:41.713 [restartedMain] INFO  org.xnio - XNIO version 3.8.8.Final
-2023-10-24 21:31:41.718 [restartedMain] INFO  org.xnio.nio - XNIO NIO Implementation Version 3.8.8.Final
-2023-10-24 21:31:41.732 [restartedMain] INFO  org.jboss.threads - JBoss Threads version 3.5.0.Final
-2023-10-24 21:31:41.750 [restartedMain] INFO  o.s.b.w.e.undertow.UndertowWebServer - Undertow started on port(s) 9000 (http)
-2023-10-24 21:31:41.756 [restartedMain] INFO  c.example.oauth21.Oauth21Application - Started Oauth21Application in 9.643 seconds (process running for 9.916)
-2023-10-24 21:31:58.290 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - Starting DefaultAuthorizationServerApplicationTests using Java 17.0.6 with PID 8102 (started by kevin in /Users/kevin/Documents/study_workspace/oauth21)
-2023-10-24 21:31:58.291 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - The following 1 profile is active: "dev"
-2023-10-24 21:31:58.594 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2023-10-24 21:31:58.595 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-10-24 21:31:58.610 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
-2023-10-24 21:31:58.925 [main] WARN  io.undertow.websockets.jsr - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
-2023-10-24 21:31:58.933 [main] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
-2023-10-24 21:31:58.934 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 635 ms
-2023-10-24 21:31:59.113 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2023-10-24 21:31:59.262 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@77eb607e
-2023-10-24 21:31:59.263 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2023-10-24 21:31:59.426 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@26d7cb0d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@23e9dd78, org.springframework.security.web.context.SecurityContextHolderFilter@6f655dbd, org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.AuthorizationServerContextFilter@3dad535f, org.springframework.security.web.header.HeaderWriterFilter@32513dea, org.springframework.security.web.csrf.CsrfFilter@280d6a20, org.springframework.security.oauth2.server.authorization.oidc.web.OidcLogoutEndpointFilter@4cadd4d4, org.springframework.security.web.authentication.logout.LogoutFilter@4449b273, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationServerMetadataEndpointFilter@5cfa2ac5, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter@7672960e, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceVerificationEndpointFilter@36638b59, org.springframework.security.oauth2.server.authorization.oidc.web.OidcProviderConfigurationEndpointFilter@484302ee, org.springframework.security.oauth2.server.authorization.web.NimbusJwkSetEndpointFilter@52eca410, org.springframework.security.oauth2.server.authorization.web.OAuth2ClientAuthenticationFilter@4f4d05b3, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@19739906, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@93f15f6, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@470c4229, org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter@24e2355c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7ac1b6c0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5896b9f5, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6408be5, org.springframework.security.web.access.ExceptionTranslationFilter@73da303e, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenEndpointFilter@398694a6, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenIntrospectionEndpointFilter@1e7cfd49, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenRevocationEndpointFilter@2168def, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceAuthorizationEndpointFilter@4f2fdf3d, org.springframework.security.oauth2.server.authorization.oidc.web.OidcUserInfoEndpointFilter@6c9151c1]
-2023-10-24 21:31:59.529 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@460b77d6, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6cb662e8, org.springframework.security.web.context.SecurityContextHolderFilter@2361365c, org.springframework.security.web.header.HeaderWriterFilter@35af1558, org.springframework.security.web.csrf.CsrfFilter@72b10258, org.springframework.security.web.authentication.logout.LogoutFilter@2d88c1bf, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@33399052, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@11c25846, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@12bcf7c6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@59b853aa, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4ab90d01, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@13f2d42c, org.springframework.security.web.access.ExceptionTranslationFilter@77ec9fdb, org.springframework.security.web.access.intercept.AuthorizationFilter@3a116ca6]
-2023-10-24 21:31:59.772 [main] INFO  io.undertow.servlet - Initializing Spring TestDispatcherServlet ''
-2023-10-24 21:31:59.772 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2023-10-24 21:31:59.773 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
-2023-10-24 21:31:59.994 [main] INFO  io.undertow - starting server: Undertow - 2.3.10.Final
-2023-10-24 21:31:59.998 [main] INFO  org.xnio - XNIO version 3.8.8.Final
-2023-10-24 21:32:00.001 [main] INFO  org.xnio.nio - XNIO NIO Implementation Version 3.8.8.Final
-2023-10-24 21:32:00.039 [main] INFO  org.jboss.threads - JBoss Threads version 3.5.0.Final
-2023-10-24 21:32:00.059 [main] INFO  o.s.b.w.e.undertow.UndertowWebServer - Undertow started on port(s) 50983 (http)
-2023-10-24 21:32:00.065 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - Started DefaultAuthorizationServerApplicationTests in 1.956 seconds (process running for 2.369)
-2023-10-24 21:32:00.562 [XNIO-1 task-2] INFO  io.undertow.servlet - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-10-24 21:32:00.563 [XNIO-1 task-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2023-10-24 21:32:00.563 [XNIO-1 task-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
-2023-10-24 21:32:00.874 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Spring Authorization Server sample</title>
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
-</head>
-<body>
-<div class="container">
-    <div class="row py-5">
-        <div class="col-md-6">
-            <h2 class="text-danger">Error</h2>
-            <p>Forbidden</p>
-        </div>
-    </div>
-</div>
-</body>
-</html>
-2023-10-24 21:32:00.881 [SpringApplicationShutdownHook] INFO  io.undertow - stopping server: Undertow - 2.3.10.Final
-2023-10-24 21:32:00.890 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2023-10-24 21:32:00.895 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2023-10-24 21:44:33.929 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - Starting DefaultAuthorizationServerApplicationTests using Java 17.0.6 with PID 10115 (started by kevin in /Users/kevin/Documents/study_workspace/oauth21)
-2023-10-24 21:44:33.930 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - The following 1 profile is active: "dev"
-2023-10-24 21:44:34.197 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 2 class path changes (0 additions, 0 deletions, 2 modifications)
-2023-10-24 21:44:34.199 [Thread-5] INFO  io.undertow - stopping server: Undertow - 2.3.10.Final
-2023-10-24 21:44:34.200 [Thread-5] INFO  io.undertow.servlet - Destroying Spring FrameworkServlet 'dispatcherServlet'
-2023-10-24 21:44:34.277 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2023-10-24 21:44:34.278 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-10-24 21:44:34.298 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
-2023-10-24 21:44:34.313 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2023-10-24 21:44:34.318 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2023-10-24 21:44:34.357 [restartedMain] INFO  c.example.oauth21.Oauth21Application - Starting Oauth21Application using Java 17.0.6 with PID 8040 (/Users/kevin/Documents/study_workspace/oauth21/target/classes started by kevin in /Users/kevin/Documents/study_workspace/oauth21)
-2023-10-24 21:44:34.358 [restartedMain] INFO  c.example.oauth21.Oauth21Application - The following 1 profile is active: "dev"
-2023-10-24 21:44:34.453 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2023-10-24 21:44:34.453 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-10-24 21:44:34.456 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 2 ms. Found 0 Redis repository interfaces.
-2023-10-24 21:44:34.521 [restartedMain] WARN  io.undertow.websockets.jsr - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
-2023-10-24 21:44:34.521 [restartedMain] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
-2023-10-24 21:44:34.521 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 162 ms
-2023-10-24 21:44:34.565 [restartedMain] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authorizationServerSecurityFilterChain' defined in class path resource [com/example/oauth21/config/AuthorizationServerConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'authorizationServerSecurityFilterChain' threw exception with message: Error creating bean with name 'sessionRegistry' defined in class path resource [com/example/oauth21/config/DefaultSecurityConfig.class]: Unsatisfied dependency expressed through method 'sessionRegistry' parameter 0: No qualifying bean of type 'org.springframework.session.data.redis.RedisIndexedSessionRepository' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
-2023-10-24 21:44:34.568 [restartedMain] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2023-10-24 21:44:34.578 [restartedMain] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Parameter 0 of method sessionRegistry in com.example.oauth21.config.DefaultSecurityConfig required a bean of type 'org.springframework.session.data.redis.RedisIndexedSessionRepository' that could not be found.
-
-
-Action:
-
-Consider defining a bean of type 'org.springframework.session.data.redis.RedisIndexedSessionRepository' in your configuration.
-
-2023-10-24 21:44:34.653 [main] WARN  io.undertow.websockets.jsr - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
-2023-10-24 21:44:34.663 [main] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
-2023-10-24 21:44:34.664 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 725 ms
-2023-10-24 21:44:34.866 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authorizationServerSecurityFilterChain' defined in class path resource [com/example/oauth21/config/AuthorizationServerConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'authorizationServerSecurityFilterChain' threw exception with message: Error creating bean with name 'sessionRegistry' defined in class path resource [com/example/oauth21/config/DefaultSecurityConfig.class]: Unsatisfied dependency expressed through method 'sessionRegistry' parameter 0: No qualifying bean of type 'org.springframework.session.data.redis.RedisIndexedSessionRepository' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
-2023-10-24 21:44:34.873 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2023-10-24 21:44:34.885 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
-
-***************************
-APPLICATION FAILED TO START
-***************************
-
-Description:
-
-Parameter 0 of method sessionRegistry in com.example.oauth21.config.DefaultSecurityConfig required a bean of type 'org.springframework.session.data.redis.RedisIndexedSessionRepository' that could not be found.
-
-
-Action:
-
-Consider defining a bean of type 'org.springframework.session.data.redis.RedisIndexedSessionRepository' in your configuration.
-
-2023-10-24 21:44:34.888 [main] ERROR o.s.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener] to prepare test instance [com.example.oauth21.DefaultAuthorizationServerApplicationTests@4afdfc0f]
-java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@1f42366 testClass = com.example.oauth21.DefaultAuthorizationServerApplicationTests, locations = [], classes = [com.example.oauth21.Oauth21Application], contextInitializerClasses = [], activeProfiles = [], propertySourceLocations = [], propertySourceProperties = ["org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true", "server.port=0"], contextCustomizers = [[ImportsContextCustomizer@46c662f2 key = [org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebDriverAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.client.servlet.OAuth2ClientAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration, org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration, org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcSecurityConfiguration, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcWebClientAutoConfiguration, org.springframework.boot.test.autoconfigure.web.reactive.WebTestClientAutoConfiguration]], org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@2034b64c, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1cf6d1be, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@28261e8e, org.springframework.boot.test.autoconfigure.actuate.observability.ObservabilityContextCustomizerFactory$DisableObservabilityContextCustomizer@1f, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@4b3fa0b3, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizer@7ce69770, org.springframework.boot.test.context.SpringBootTestAnnotation@5d367724], resourceBasePath = "src/main/webapp", contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:143)
-	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:127)
-	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:141)
-	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:97)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:241)
-	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:138)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$10(ClassBasedTestDescriptor.java:377)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:382)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$11(ClassBasedTestDescriptor.java:377)
-	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
-	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179)
-	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1625)
-	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
-	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
-	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:310)
-	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735)
-	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
-	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:376)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$6(ClassBasedTestDescriptor.java:289)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:288)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$4(ClassBasedTestDescriptor.java:278)
-	at java.base/java.util.Optional.orElseGet(Optional.java:364)
-	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$5(ClassBasedTestDescriptor.java:277)
-	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:31)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:105)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:104)
-	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:68)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$2(NodeTestTask.java:123)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:123)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:90)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
-	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
-	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
-	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
-	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
-	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:147)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:127)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:90)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:55)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:102)
-	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:54)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
-	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86)
-	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86)
-	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53)
-	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57)
-	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
-	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
-	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
-	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
-	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'authorizationServerSecurityFilterChain' defined in class path resource [com/example/oauth21/config/AuthorizationServerConfig.class]: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'authorizationServerSecurityFilterChain' threw exception with message: Error creating bean with name 'sessionRegistry' defined in class path resource [com/example/oauth21/config/DefaultSecurityConfig.class]: Unsatisfied dependency expressed through method 'sessionRegistry' parameter 0: No qualifying bean of type 'org.springframework.session.data.redis.RedisIndexedSessionRepository' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:654)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:642)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1332)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1162)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:973)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:950)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:616)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:738)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:440)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
-	at org.springframework.boot.test.context.SpringBootContextLoader.lambda$loadContext$3(SpringBootContextLoader.java:137)
-	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:58)
-	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:46)
-	at org.springframework.boot.SpringApplication.withHook(SpringApplication.java:1406)
-	at org.springframework.boot.test.context.SpringBootContextLoader$ContextLoaderHook.run(SpringBootContextLoader.java:545)
-	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:137)
-	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:108)
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:187)
-	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:119)
-	... 72 common frames omitted
-Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.security.web.SecurityFilterChain]: Factory method 'authorizationServerSecurityFilterChain' threw exception with message: Error creating bean with name 'sessionRegistry' defined in class path resource [com/example/oauth21/config/DefaultSecurityConfig.class]: Unsatisfied dependency expressed through method 'sessionRegistry' parameter 0: No qualifying bean of type 'org.springframework.session.data.redis.RedisIndexedSessionRepository' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:171)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:650)
-	... 97 common frames omitted
-Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'sessionRegistry' defined in class path resource [com/example/oauth21/config/DefaultSecurityConfig.class]: Unsatisfied dependency expressed through method 'sessionRegistry' parameter 0: No qualifying bean of type 'org.springframework.session.data.redis.RedisIndexedSessionRepository' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:801)
-	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:545)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1332)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1162)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:560)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:663)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeansOfType(DefaultListableBeanFactory.java:651)
-	at org.springframework.context.support.AbstractApplicationContext.getBeansOfType(AbstractApplicationContext.java:1312)
-	at org.springframework.beans.factory.BeanFactoryUtils.beansOfTypeIncludingAncestors(BeanFactoryUtils.java:321)
-	at org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2ConfigurerUtils.getOptionalBean(OAuth2ConfigurerUtils.java:201)
-	at org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer.initSessionRegistry(OAuth2AuthorizationServerConfigurer.java:398)
-	at org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer.init(OAuth2AuthorizationServerConfigurer.java:278)
-	at org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer.init(OAuth2AuthorizationServerConfigurer.java:83)
-	at org.springframework.security.config.annotation.AbstractConfiguredSecurityBuilder.init(AbstractConfiguredSecurityBuilder.java:344)
-	at org.springframework.security.config.annotation.AbstractConfiguredSecurityBuilder.doBuild(AbstractConfiguredSecurityBuilder.java:306)
-	at org.springframework.security.config.annotation.AbstractSecurityBuilder.build(AbstractSecurityBuilder.java:38)
-	at com.example.oauth21.config.AuthorizationServerConfig.authorizationServerSecurityFilterChain(AuthorizationServerConfig.java:136)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:139)
-	... 98 common frames omitted
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'org.springframework.session.data.redis.RedisIndexedSessionRepository' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1824)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1383)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1337)
-	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:910)
-	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:788)
-	... 124 common frames omitted
-2023-10-24 21:45:57.558 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - Starting DefaultAuthorizationServerApplicationTests using Java 17.0.6 with PID 10338 (started by kevin in /Users/kevin/Documents/study_workspace/oauth21)
-2023-10-24 21:45:57.559 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - The following 1 profile is active: "dev"
-2023-10-24 21:45:57.847 [restartedMain] INFO  c.example.oauth21.Oauth21Application - Starting Oauth21Application using Java 17.0.6 with PID 8040 (/Users/kevin/Documents/study_workspace/oauth21/target/classes started by kevin in /Users/kevin/Documents/study_workspace/oauth21)
-2023-10-24 21:45:57.847 [restartedMain] INFO  c.example.oauth21.Oauth21Application - The following 1 profile is active: "dev"
-2023-10-24 21:45:57.910 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2023-10-24 21:45:57.911 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-10-24 21:45:57.933 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 14 ms. Found 0 Redis repository interfaces.
-2023-10-24 21:45:57.935 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
-2023-10-24 21:45:57.936 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-10-24 21:45:57.938 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 2 ms. Found 0 Redis repository interfaces.
-2023-10-24 21:45:57.991 [restartedMain] WARN  io.undertow.websockets.jsr - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
-2023-10-24 21:45:57.991 [restartedMain] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
-2023-10-24 21:45:57.991 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 143 ms
-2023-10-24 21:45:58.031 [restartedMain] WARN  o.s.c.LocalVariableTableParameterNameDiscoverer - Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.oauth21.config.DefaultSecurityConfig
-2023-10-24 21:45:58.039 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
-2023-10-24 21:45:58.050 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@552e9cea
-2023-10-24 21:45:58.051 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
-2023-10-24 21:45:58.131 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer$$Lambda$1525/0x0000000801428d48@1da85608 with [org.springframework.security.web.session.DisableEncodeUrlFilter@89b770, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5067b215, org.springframework.security.web.context.SecurityContextHolderFilter@8e3f381, org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.AuthorizationServerContextFilter@7f0c4613, org.springframework.security.web.header.HeaderWriterFilter@60f61e78, org.springframework.security.web.csrf.CsrfFilter@5f266717, org.springframework.security.oauth2.server.authorization.oidc.web.OidcLogoutEndpointFilter@3099e596, org.springframework.security.web.authentication.logout.LogoutFilter@6d513267, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationServerMetadataEndpointFilter@1acdd5fd, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter@23bb2e90, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceVerificationEndpointFilter@768786ba, org.springframework.security.oauth2.server.authorization.oidc.web.OidcProviderConfigurationEndpointFilter@645d3f12, org.springframework.security.oauth2.server.authorization.web.NimbusJwkSetEndpointFilter@7224434f, org.springframework.security.oauth2.server.authorization.web.OAuth2ClientAuthenticationFilter@7eeb024d, org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter@d6ebdc8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@64113355, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2a6c67b1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@289fd52c, org.springframework.security.web.access.ExceptionTranslationFilter@362f139d, org.springframework.security.web.access.intercept.AuthorizationFilter@49af914b, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenEndpointFilter@16abd665, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenIntrospectionEndpointFilter@30f45797, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenRevocationEndpointFilter@44e20e49, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceAuthorizationEndpointFilter@3e5767eb, org.springframework.security.oauth2.server.authorization.oidc.web.OidcUserInfoEndpointFilter@3574b451]
-2023-10-24 21:45:58.163 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@143d0722, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1a46c874, org.springframework.security.web.context.SecurityContextHolderFilter@44d90a6f, org.springframework.security.web.header.HeaderWriterFilter@1ac5fd74, org.springframework.security.web.csrf.CsrfFilter@26784d15, org.springframework.security.web.authentication.logout.LogoutFilter@18615d10, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@2b6db39a, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@243f0fdc, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@39f6f069, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@20ade704, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@217cc097, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5c7159c5, org.springframework.security.web.access.ExceptionTranslationFilter@5f8bcb65, org.springframework.security.web.access.intercept.AuthorizationFilter@100416d7]
-2023-10-24 21:45:58.200 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
-2023-10-24 21:45:58.207 [restartedMain] INFO  io.undertow - starting server: Undertow - 2.3.10.Final
-2023-10-24 21:45:58.209 [restartedMain] INFO  o.s.b.w.e.undertow.UndertowWebServer - Undertow started on port(s) 9000 (http)
-2023-10-24 21:45:58.212 [restartedMain] INFO  c.example.oauth21.Oauth21Application - Started Oauth21Application in 0.381 seconds (process running for 866.405)
-2023-10-24 21:45:58.213 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
-2023-10-24 21:45:58.263 [main] WARN  io.undertow.websockets.jsr - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
-2023-10-24 21:45:58.272 [main] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
-2023-10-24 21:45:58.273 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 705 ms
-2023-10-24 21:45:58.458 [main] WARN  o.s.c.LocalVariableTableParameterNameDiscoverer - Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.oauth21.config.DefaultSecurityConfig
-2023-10-24 21:45:58.596 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2023-10-24 21:45:58.774 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@37e64e37
-2023-10-24 21:45:58.775 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2023-10-24 21:45:58.970 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer$$Lambda$1184/0x0000000801155270@79fcd194 with [org.springframework.security.web.session.DisableEncodeUrlFilter@73d8c8d7, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@361b3ca6, org.springframework.security.web.context.SecurityContextHolderFilter@154b0748, org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.AuthorizationServerContextFilter@2e47a71e, org.springframework.security.web.header.HeaderWriterFilter@7c5d36c3, org.springframework.security.web.csrf.CsrfFilter@2bc8caa7, org.springframework.security.oauth2.server.authorization.oidc.web.OidcLogoutEndpointFilter@516037be, org.springframework.security.web.authentication.logout.LogoutFilter@706d2bae, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationServerMetadataEndpointFilter@3921135e, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter@5487a8f1, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceVerificationEndpointFilter@6bf28f61, org.springframework.security.oauth2.server.authorization.oidc.web.OidcProviderConfigurationEndpointFilter@2d5c160e, org.springframework.security.oauth2.server.authorization.web.NimbusJwkSetEndpointFilter@686fb58a, org.springframework.security.oauth2.server.authorization.web.OAuth2ClientAuthenticationFilter@631678e6, org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter@4be1dce6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6cd7dc74, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5ca8bd01, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@48333b12, org.springframework.security.web.access.ExceptionTranslationFilter@51b59d58, org.springframework.security.web.access.intercept.AuthorizationFilter@2a5efbb9, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenEndpointFilter@1e66bf2d, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenIntrospectionEndpointFilter@25435731, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenRevocationEndpointFilter@21d3d6ec, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceAuthorizationEndpointFilter@a30dbc0, org.springframework.security.oauth2.server.authorization.oidc.web.OidcUserInfoEndpointFilter@19d9ba89]
-2023-10-24 21:45:59.076 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@165454f7, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2a19c36b, org.springframework.security.web.context.SecurityContextHolderFilter@7b7b1448, org.springframework.security.web.header.HeaderWriterFilter@3afaa39f, org.springframework.security.web.csrf.CsrfFilter@2b561f51, org.springframework.security.web.authentication.logout.LogoutFilter@6963b0bd, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@3fe5ad73, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@f83d121, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4a49919c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@60cc20e1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@25109d84, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@38856d6e, org.springframework.security.web.access.ExceptionTranslationFilter@3d5f08d4, org.springframework.security.web.access.intercept.AuthorizationFilter@49741274]
-2023-10-24 21:45:59.199 [main] INFO  io.undertow.servlet - Initializing Spring TestDispatcherServlet ''
-2023-10-24 21:45:59.199 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2023-10-24 21:45:59.200 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
-2023-10-24 21:45:59.434 [main] INFO  io.undertow - starting server: Undertow - 2.3.10.Final
-2023-10-24 21:45:59.438 [main] INFO  org.xnio - XNIO version 3.8.8.Final
-2023-10-24 21:45:59.442 [main] INFO  org.xnio.nio - XNIO NIO Implementation Version 3.8.8.Final
-2023-10-24 21:45:59.487 [main] INFO  org.jboss.threads - JBoss Threads version 3.5.0.Final
-2023-10-24 21:45:59.512 [main] INFO  o.s.b.w.e.undertow.UndertowWebServer - Undertow started on port(s) 51490 (http)
-2023-10-24 21:45:59.519 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - Started DefaultAuthorizationServerApplicationTests in 2.161 seconds (process running for 2.626)
-2023-10-24 21:46:09.056 [XNIO-2 task-2] INFO  io.undertow.servlet - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-10-24 21:46:09.056 [XNIO-2 task-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2023-10-24 21:46:09.057 [XNIO-2 task-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
-2023-10-24 21:46:09.265 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - {"access_token":"eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJtZXNzYWdpbmctY2xpZW50IiwiYXVkIjoibWVzc2FnaW5nLWNsaWVudCIsIm5iZiI6MTY5ODE1NTE2OSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo5MDAwIiwiZXhwIjoxNjk4MTU4NzY5LCJjbGFpbS0xIjoidmFsdWUtMSIsImlhdCI6MTY5ODE1NTE2OSwiY2xhaW0tMiI6InZhbHVlLTIifQ.cT71ql4HTNa80lMMrbyRQeexDPMiHqAuTnNHWToEfHPVoL4IeRFpaHmF0b0WLTU9wXj4NC6KhGx_8UahW4IwpTAYb9TaP5LgyLVEXr9yJy9vubrFJbugwdR0RfJma8ydHYfaz4uXAFcMZJhnr80gHwPYZdmI1NgCqBIID8CKR4JlzwrkAZyzRD3krzUCxPZRsCKUHrV1ebFRqHnBKXiLEIWDnwSKD_5ug9QIdktTBBF9aak2pMbbKueNiE-jMv6CxWHd3PvYXUAm6I84lkW2QynC1C2-VX6URG30xcKnttQCUw0woUqbR-sovxCZcD624J-KFHVP_7bn5uNfiO9qlw","token_type":"Bearer","expires_in":3599}
-2023-10-24 21:46:09.272 [SpringApplicationShutdownHook] INFO  io.undertow - stopping server: Undertow - 2.3.10.Final
-2023-10-24 21:46:09.281 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2023-10-24 21:46:09.286 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2023-10-24 21:46:44.396 [XNIO-2 task-3] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.UnsatisfiedServletRequestParameterException: Parameter conditions "success" not met for actual request parameters: continue={}]
+2023-10-27 00:01:44.006 [XNIO-1 task-2] ERROR io.undertow.request - UT005023: Exception handling request to /oauth2/device_verification
+java.lang.NullPointerException: Cannot invoke "java.util.Collection.iterator()" because "c" is null
+	at java.base/java.util.AbstractCollection.containsAll(AbstractCollection.java:308)
+	at org.springframework.security.oauth2.server.authorization.authentication.OAuth2DeviceVerificationAuthenticationProvider.requiresAuthorizationConsent(OAuth2DeviceVerificationAuthenticationProvider.java:190)
+	at org.springframework.security.oauth2.server.authorization.authentication.OAuth2DeviceVerificationAuthenticationProvider.authenticate(OAuth2DeviceVerificationAuthenticationProvider.java:128)
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:182)
+	at org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceVerificationEndpointFilter.doFilterInternal(OAuth2DeviceVerificationEndpointFilter.java:150)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter.doFilterInternal(OAuth2AuthorizationEndpointFilter.java:157)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationServerMetadataEndpointFilter.doFilterInternal(OAuth2AuthorizationServerMetadataEndpointFilter.java:84)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.oauth2.server.authorization.oidc.web.OidcLogoutEndpointFilter.doFilterInternal(OidcLogoutEndpointFilter.java:117)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.csrf.CsrfFilter.doFilterInternal(CsrfFilter.java:117)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.AuthorizationServerContextFilter.doFilterInternal(AuthorizationServerContextFilter.java:61)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:67)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:67)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:67)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at org.springframework.session.web.http.SessionRepositoryFilter.doFilterInternal(SessionRepositoryFilter.java:143)
+	at org.springframework.session.web.http.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:82)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:67)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:67)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at io.undertow.servlet.handlers.FilterHandler.handleRequest(FilterHandler.java:84)
+	at io.undertow.servlet.handlers.security.ServletSecurityRoleHandler.handleRequest(ServletSecurityRoleHandler.java:62)
+	at io.undertow.servlet.handlers.ServletChain$1.handleRequest(ServletChain.java:68)
+	at io.undertow.servlet.handlers.ServletDispatchingHandler.handleRequest(ServletDispatchingHandler.java:36)
+	at io.undertow.servlet.handlers.RedirectDirHandler.handleRequest(RedirectDirHandler.java:68)
+	at io.undertow.servlet.handlers.security.SSLInformationAssociationHandler.handleRequest(SSLInformationAssociationHandler.java:117)
+	at io.undertow.servlet.handlers.security.ServletAuthenticationCallHandler.handleRequest(ServletAuthenticationCallHandler.java:57)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.security.handlers.AbstractConfidentialityHandler.handleRequest(AbstractConfidentialityHandler.java:46)
+	at io.undertow.servlet.handlers.security.ServletConfidentialityConstraintHandler.handleRequest(ServletConfidentialityConstraintHandler.java:64)
+	at io.undertow.security.handlers.AuthenticationMechanismsHandler.handleRequest(AuthenticationMechanismsHandler.java:60)
+	at io.undertow.servlet.handlers.security.CachedAuthenticatedSessionHandler.handleRequest(CachedAuthenticatedSessionHandler.java:77)
+	at io.undertow.security.handlers.AbstractSecurityContextAssociationHandler.handleRequest(AbstractSecurityContextAssociationHandler.java:43)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.servlet.handlers.SendErrorPageHandler.handleRequest(SendErrorPageHandler.java:52)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.servlet.handlers.SessionRestoringHandler.handleRequest(SessionRestoringHandler.java:119)
+	at io.undertow.servlet.handlers.ServletInitialHandler.handleFirstRequest(ServletInitialHandler.java:276)
+	at io.undertow.servlet.handlers.ServletInitialHandler$2.call(ServletInitialHandler.java:135)
+	at io.undertow.servlet.handlers.ServletInitialHandler$2.call(ServletInitialHandler.java:132)
+	at io.undertow.servlet.core.ServletRequestContextThreadSetupAction$1.call(ServletRequestContextThreadSetupAction.java:48)
+	at io.undertow.servlet.core.ContextClassLoaderSetupAction$1.call(ContextClassLoaderSetupAction.java:43)
+	at io.undertow.servlet.handlers.ServletInitialHandler.dispatchRequest(ServletInitialHandler.java:256)
+	at io.undertow.servlet.handlers.ServletInitialHandler$1.handleRequest(ServletInitialHandler.java:101)
+	at io.undertow.server.Connectors.executeRootHandler(Connectors.java:393)
+	at io.undertow.server.HttpServerExchange$1.run(HttpServerExchange.java:859)
+	at org.jboss.threads.ContextHandler$1.runWith(ContextHandler.java:18)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.run(EnhancedQueueExecutor.java:2513)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1538)
+	at org.xnio.XnioWorker$WorkerThreadFactory$1$1.run(XnioWorker.java:1282)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-10-27 00:01:52.318 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - Starting DefaultAuthorizationServerApplicationTests using Java 17.0.6 with PID 26738 (started by kevin in /Users/kevin/Documents/study_workspace/oauth21)
+2023-10-27 00:01:52.318 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - The following 1 profile is active: "dev"
+2023-10-27 00:01:52.629 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-10-27 00:01:52.630 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-10-27 00:01:52.645 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2023-10-27 00:01:52.952 [main] WARN  io.undertow.websockets.jsr - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2023-10-27 00:01:52.960 [main] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
+2023-10-27 00:01:52.961 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 634 ms
+2023-10-27 00:01:53.137 [main] WARN  o.s.c.LocalVariableTableParameterNameDiscoverer - Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.oauth21.config.DefaultSecurityConfig
+2023-10-27 00:01:53.261 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-10-27 00:01:53.424 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@437c1a87
+2023-10-27 00:01:53.425 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-10-27 00:01:53.581 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer$$Lambda$1186/0x00000008011556d8@70819ba8 with [org.springframework.security.web.session.DisableEncodeUrlFilter@446a692f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@283ecb4b, org.springframework.security.web.context.SecurityContextHolderFilter@7aab98b6, org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.AuthorizationServerContextFilter@10301d6f, org.springframework.security.web.header.HeaderWriterFilter@3b4f1eb, org.springframework.security.web.csrf.CsrfFilter@1700d089, org.springframework.security.oauth2.server.authorization.oidc.web.OidcLogoutEndpointFilter@3c68e82, org.springframework.security.web.authentication.logout.LogoutFilter@217fd3c, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationServerMetadataEndpointFilter@32d8710a, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter@3205610d, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceVerificationEndpointFilter@2ab7f649, org.springframework.security.oauth2.server.authorization.oidc.web.OidcProviderConfigurationEndpointFilter@2d3eb1ea, org.springframework.security.oauth2.server.authorization.web.NimbusJwkSetEndpointFilter@7ebaf0d, org.springframework.security.oauth2.server.authorization.web.OAuth2ClientAuthenticationFilter@582ea164, org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter@366b4a7b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@22bfd4b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7cd25bf5, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@a30dbc0, org.springframework.security.web.access.ExceptionTranslationFilter@391e85df, org.springframework.security.web.access.intercept.AuthorizationFilter@361f1647, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenEndpointFilter@16c8e9b8, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenIntrospectionEndpointFilter@1344f7fe, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenRevocationEndpointFilter@20b67366, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceAuthorizationEndpointFilter@14b9df65, org.springframework.security.oauth2.server.authorization.oidc.web.OidcUserInfoEndpointFilter@d65e744]
+2023-10-27 00:01:53.687 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@77401977, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7865cc83, org.springframework.security.web.context.SecurityContextHolderFilter@467cd4b9, org.springframework.security.web.header.HeaderWriterFilter@3186f8f5, org.springframework.security.web.csrf.CsrfFilter@66a93b25, org.springframework.security.web.authentication.logout.LogoutFilter@a4dcede, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@7cdb05aa, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@2079fcfc, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@40b8158d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@69a3bf40, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2c731a16, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5cb76070, org.springframework.security.web.access.ExceptionTranslationFilter@3f3f554f, org.springframework.security.web.access.intercept.AuthorizationFilter@4a773f08]
+2023-10-27 00:01:53.805 [main] INFO  io.undertow.servlet - Initializing Spring TestDispatcherServlet ''
+2023-10-27 00:01:53.805 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-10-27 00:01:53.805 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-10-27 00:01:54.033 [main] INFO  io.undertow - starting server: Undertow - 2.3.10.Final
+2023-10-27 00:01:54.037 [main] INFO  org.xnio - XNIO version 3.8.8.Final
+2023-10-27 00:01:54.041 [main] INFO  org.xnio.nio - XNIO NIO Implementation Version 3.8.8.Final
+2023-10-27 00:01:54.081 [main] INFO  org.jboss.threads - JBoss Threads version 3.5.0.Final
+2023-10-27 00:01:54.103 [main] INFO  o.s.b.w.e.undertow.UndertowWebServer - Undertow started on port(s) 56369 (http)
+2023-10-27 00:01:54.109 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - Started DefaultAuthorizationServerApplicationTests in 1.975 seconds (process running for 2.395)
+2023-10-27 00:01:54.552 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - {"user_code":"DDSX-WPJZ","device_code":"-RV8PzZ68kYUqHaFWQyCPogIEfwTNNIqnRT1osTUjpJIPRXYygXxksiOthymZccfQ9tR_L86BB56eKJPK5okp1MMDJcyNwpyBx1LzVtqNloipUeg8dTcdL_3YJlwHOAU","verification_uri_complete":"http://localhost:9000/activate?user_code=DDSX-WPJZ","verification_uri":"http://localhost:9000/activate","expires_in":300}
+2023-10-27 00:01:54.559 [SpringApplicationShutdownHook] INFO  io.undertow - stopping server: Undertow - 2.3.10.Final
+2023-10-27 00:01:54.569 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-10-27 00:01:54.575 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-10-27 00:02:18.264 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - Starting DefaultAuthorizationServerApplicationTests using Java 17.0.6 with PID 26810 (started by kevin in /Users/kevin/Documents/study_workspace/oauth21)
+2023-10-27 00:02:18.265 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - The following 1 profile is active: "dev"
+2023-10-27 00:02:18.564 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-10-27 00:02:18.566 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-10-27 00:02:18.582 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
+2023-10-27 00:02:18.885 [main] WARN  io.undertow.websockets.jsr - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2023-10-27 00:02:18.894 [main] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
+2023-10-27 00:02:18.894 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 621 ms
+2023-10-27 00:02:19.069 [main] WARN  o.s.c.LocalVariableTableParameterNameDiscoverer - Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.oauth21.config.DefaultSecurityConfig
+2023-10-27 00:02:19.197 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-10-27 00:02:19.352 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@559c4e06
+2023-10-27 00:02:19.354 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-10-27 00:02:19.528 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer$$Lambda$1186/0x0000000801155270@a251135 with [org.springframework.security.web.session.DisableEncodeUrlFilter@70819ba8, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@446a692f, org.springframework.security.web.context.SecurityContextHolderFilter@2f3a8166, org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.AuthorizationServerContextFilter@25435731, org.springframework.security.web.header.HeaderWriterFilter@48c3a0ef, org.springframework.security.web.csrf.CsrfFilter@30ed4034, org.springframework.security.oauth2.server.authorization.oidc.web.OidcLogoutEndpointFilter@75c8d8e7, org.springframework.security.web.authentication.logout.LogoutFilter@5a58db42, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationServerMetadataEndpointFilter@69fd99c1, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter@706d2bae, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceVerificationEndpointFilter@62ee1c89, org.springframework.security.oauth2.server.authorization.oidc.web.OidcProviderConfigurationEndpointFilter@43de9fc9, org.springframework.security.oauth2.server.authorization.web.NimbusJwkSetEndpointFilter@49f1184e, org.springframework.security.oauth2.server.authorization.web.OAuth2ClientAuthenticationFilter@2bc8caa7, org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter@20c283b4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5e3405a1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@21ce3b22, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@283ecb4b, org.springframework.security.web.access.ExceptionTranslationFilter@180f33b2, org.springframework.security.web.access.intercept.AuthorizationFilter@39ac8c0c, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenEndpointFilter@5f35370b, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenIntrospectionEndpointFilter@631678e6, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenRevocationEndpointFilter@652a1a17, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceAuthorizationEndpointFilter@81dfdee, org.springframework.security.oauth2.server.authorization.oidc.web.OidcUserInfoEndpointFilter@788a0513]
+2023-10-27 00:02:19.653 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2079fcfc, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@77401977, org.springframework.security.web.context.SecurityContextHolderFilter@3186f8f5, org.springframework.security.web.header.HeaderWriterFilter@3f3f554f, org.springframework.security.web.csrf.CsrfFilter@6c737fdb, org.springframework.security.web.authentication.logout.LogoutFilter@2a341e3d, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@3e1897d, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@7cdb05aa, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4a773f08, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@467cd4b9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@69a3bf40, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7865cc83, org.springframework.security.web.access.ExceptionTranslationFilter@66a93b25, org.springframework.security.web.access.intercept.AuthorizationFilter@7ee02968]
+2023-10-27 00:02:19.767 [main] INFO  io.undertow.servlet - Initializing Spring TestDispatcherServlet ''
+2023-10-27 00:02:19.768 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-10-27 00:02:19.768 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-10-27 00:02:19.982 [main] INFO  io.undertow - starting server: Undertow - 2.3.10.Final
+2023-10-27 00:02:19.986 [main] INFO  org.xnio - XNIO version 3.8.8.Final
+2023-10-27 00:02:19.990 [main] INFO  org.xnio.nio - XNIO NIO Implementation Version 3.8.8.Final
+2023-10-27 00:02:20.029 [main] INFO  org.jboss.threads - JBoss Threads version 3.5.0.Final
+2023-10-27 00:02:20.050 [main] INFO  o.s.b.w.e.undertow.UndertowWebServer - Undertow started on port(s) 56406 (http)
+2023-10-27 00:02:20.056 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - Started DefaultAuthorizationServerApplicationTests in 1.977 seconds (process running for 2.4)
+2023-10-27 00:02:20.489 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - {"user_code":"GFGP-JMGV","device_code":"e1rmb2FYSd-drVdOtPU5acDF4NKc0IqYa6-MZZlFXb7s-vylaJfDEQG92NOGOo_x3LOI87Agje78fOyH_qjGjiwoBxanQ6k_5AhZ4_RXOZYIbTkIMz0JXjTEoafyZuu_","verification_uri_complete":"http://localhost:9000/activate?user_code=GFGP-JMGV","verification_uri":"http://localhost:9000/activate","expires_in":300}
+2023-10-27 00:02:20.496 [SpringApplicationShutdownHook] INFO  io.undertow - stopping server: Undertow - 2.3.10.Final
+2023-10-27 00:02:20.505 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-10-27 00:02:20.509 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-10-27 00:02:43.748 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - Starting DefaultAuthorizationServerApplicationTests using Java 17.0.6 with PID 26886 (started by kevin in /Users/kevin/Documents/study_workspace/oauth21)
+2023-10-27 00:02:43.749 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - The following 1 profile is active: "dev"
+2023-10-27 00:02:44.053 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-10-27 00:02:44.054 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-10-27 00:02:44.069 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8 ms. Found 0 Redis repository interfaces.
+2023-10-27 00:02:44.368 [main] WARN  io.undertow.websockets.jsr - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2023-10-27 00:02:44.377 [main] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
+2023-10-27 00:02:44.377 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 621 ms
+2023-10-27 00:02:44.556 [main] WARN  o.s.c.LocalVariableTableParameterNameDiscoverer - Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.oauth21.config.DefaultSecurityConfig
+2023-10-27 00:02:44.686 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-10-27 00:02:44.837 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@559c4e06
+2023-10-27 00:02:44.838 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-10-27 00:02:45.010 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer$$Lambda$1186/0x00000008011572b0@a251135 with [org.springframework.security.web.session.DisableEncodeUrlFilter@70819ba8, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@446a692f, org.springframework.security.web.context.SecurityContextHolderFilter@2f3a8166, org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.AuthorizationServerContextFilter@25435731, org.springframework.security.web.header.HeaderWriterFilter@48c3a0ef, org.springframework.security.web.csrf.CsrfFilter@30ed4034, org.springframework.security.oauth2.server.authorization.oidc.web.OidcLogoutEndpointFilter@75c8d8e7, org.springframework.security.web.authentication.logout.LogoutFilter@5a58db42, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationServerMetadataEndpointFilter@69fd99c1, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter@706d2bae, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceVerificationEndpointFilter@62ee1c89, org.springframework.security.oauth2.server.authorization.oidc.web.OidcProviderConfigurationEndpointFilter@43de9fc9, org.springframework.security.oauth2.server.authorization.web.NimbusJwkSetEndpointFilter@49f1184e, org.springframework.security.oauth2.server.authorization.web.OAuth2ClientAuthenticationFilter@2bc8caa7, org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter@20c283b4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5e3405a1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@21ce3b22, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@283ecb4b, org.springframework.security.web.access.ExceptionTranslationFilter@180f33b2, org.springframework.security.web.access.intercept.AuthorizationFilter@39ac8c0c, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenEndpointFilter@5f35370b, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenIntrospectionEndpointFilter@631678e6, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenRevocationEndpointFilter@652a1a17, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceAuthorizationEndpointFilter@81dfdee, org.springframework.security.oauth2.server.authorization.oidc.web.OidcUserInfoEndpointFilter@788a0513]
+2023-10-27 00:02:45.130 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2079fcfc, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@77401977, org.springframework.security.web.context.SecurityContextHolderFilter@3186f8f5, org.springframework.security.web.header.HeaderWriterFilter@3f3f554f, org.springframework.security.web.csrf.CsrfFilter@6c737fdb, org.springframework.security.web.authentication.logout.LogoutFilter@2a341e3d, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@3e1897d, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@7cdb05aa, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4a773f08, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@467cd4b9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@69a3bf40, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7865cc83, org.springframework.security.web.access.ExceptionTranslationFilter@66a93b25, org.springframework.security.web.access.intercept.AuthorizationFilter@7ee02968]
+2023-10-27 00:02:45.244 [main] INFO  io.undertow.servlet - Initializing Spring TestDispatcherServlet ''
+2023-10-27 00:02:45.244 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-10-27 00:02:45.244 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
+2023-10-27 00:02:45.458 [main] INFO  io.undertow - starting server: Undertow - 2.3.10.Final
+2023-10-27 00:02:45.461 [main] INFO  org.xnio - XNIO version 3.8.8.Final
+2023-10-27 00:02:45.465 [main] INFO  org.xnio.nio - XNIO NIO Implementation Version 3.8.8.Final
+2023-10-27 00:02:45.504 [main] INFO  org.jboss.threads - JBoss Threads version 3.5.0.Final
+2023-10-27 00:02:45.526 [main] INFO  o.s.b.w.e.undertow.UndertowWebServer - Undertow started on port(s) 56436 (http)
+2023-10-27 00:02:45.532 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - Started DefaultAuthorizationServerApplicationTests in 1.971 seconds (process running for 2.455)
+2023-10-27 00:02:45.971 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - {"user_code":"WTRK-CKVT","device_code":"hVTf78NB74a4tl5PYaXC-2zd8Zthatzr5UhpxvAK9_nBpWOZ14bKPMntc0jalttFpgorT7GYCKd0RXRDmynXznYgywU1ubdXftBWzcLKSry_KD0NTknRrGPYIRMUBWeW","verification_uri_complete":"http://localhost:9000/activate?user_code=WTRK-CKVT","verification_uri":"http://localhost:9000/activate","expires_in":300}
+2023-10-27 00:02:45.979 [SpringApplicationShutdownHook] INFO  io.undertow - stopping server: Undertow - 2.3.10.Final
+2023-10-27 00:02:45.989 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-10-27 00:02:45.993 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-10-27 00:14:55.607 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-10-27 00:14:55.624 [Thread-5] INFO  io.undertow - stopping server: Undertow - 2.3.10.Final
+2023-10-27 00:14:55.630 [Thread-5] INFO  io.undertow.servlet - Destroying Spring FrameworkServlet 'dispatcherServlet'
+2023-10-27 00:14:55.783 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-10-27 00:14:55.791 [Thread-5] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-10-27 00:14:55.856 [restartedMain] INFO  c.example.oauth21.Oauth21Application - Starting Oauth21Application using Java 17.0.6 with PID 23801 (/Users/kevin/Documents/study_workspace/oauth21/target/classes started by kevin in /Users/kevin/Documents/study_workspace/oauth21)
+2023-10-27 00:14:55.856 [restartedMain] INFO  c.example.oauth21.Oauth21Application - The following 1 profile is active: "dev"
+2023-10-27 00:14:55.942 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-10-27 00:14:55.942 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-10-27 00:14:55.944 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 1 ms. Found 0 Redis repository interfaces.
+2023-10-27 00:14:56.000 [restartedMain] WARN  io.undertow.websockets.jsr - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2023-10-27 00:14:56.000 [restartedMain] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
+2023-10-27 00:14:56.000 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 143 ms
+2023-10-27 00:14:56.047 [restartedMain] WARN  o.s.c.LocalVariableTableParameterNameDiscoverer - Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.oauth21.config.DefaultSecurityConfig
+2023-10-27 00:14:56.053 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2023-10-27 00:14:56.063 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5d158b65
+2023-10-27 00:14:56.063 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2023-10-27 00:14:56.151 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer$$Lambda$901/0x000000080112baf0@38fffc28 with [org.springframework.security.web.session.DisableEncodeUrlFilter@106a427c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5846c398, org.springframework.security.web.context.SecurityContextHolderFilter@24734d98, org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.AuthorizationServerContextFilter@535f7c4f, org.springframework.security.web.header.HeaderWriterFilter@1fd45c1b, org.springframework.security.web.csrf.CsrfFilter@3ab86d20, org.springframework.security.oauth2.server.authorization.oidc.web.OidcLogoutEndpointFilter@6658637b, org.springframework.security.web.authentication.logout.LogoutFilter@11d4c49f, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationServerMetadataEndpointFilter@581019b4, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter@71b78a40, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceVerificationEndpointFilter@15f6f0ef, org.springframework.security.oauth2.server.authorization.oidc.web.OidcProviderConfigurationEndpointFilter@7f749507, org.springframework.security.oauth2.server.authorization.web.NimbusJwkSetEndpointFilter@858178e, org.springframework.security.oauth2.server.authorization.web.OAuth2ClientAuthenticationFilter@79a2ce57, org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter@2dbeee45, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5d5be55b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@100fafb6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2d0d213, org.springframework.security.web.access.ExceptionTranslationFilter@59a81e, org.springframework.security.web.access.intercept.AuthorizationFilter@4e651b38, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenEndpointFilter@17ede395, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenIntrospectionEndpointFilter@78d25749, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenRevocationEndpointFilter@20d73c5e, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceAuthorizationEndpointFilter@6dff478e, org.springframework.security.oauth2.server.authorization.oidc.web.OidcUserInfoEndpointFilter@710c9b09]
+2023-10-27 00:14:56.188 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@32a820ba, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@496f2b01, org.springframework.security.web.context.SecurityContextHolderFilter@28c75279, org.springframework.security.web.header.HeaderWriterFilter@39ecb75a, org.springframework.security.web.csrf.CsrfFilter@501f3e45, org.springframework.security.web.authentication.logout.LogoutFilter@7cb004b7, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@111bed7a, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@76a255b, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6d72c9df, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@103bc32, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@32fce0f8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7517f6b, org.springframework.security.web.access.ExceptionTranslationFilter@69cb50ea, org.springframework.security.web.access.intercept.AuthorizationFilter@35e002fe]
+2023-10-27 00:14:56.226 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-10-27 00:14:56.235 [restartedMain] INFO  io.undertow - starting server: Undertow - 2.3.10.Final
+2023-10-27 00:14:56.237 [restartedMain] INFO  o.s.b.w.e.undertow.UndertowWebServer - Undertow started on port(s) 9000 (http)
+2023-10-27 00:14:56.240 [restartedMain] INFO  c.example.oauth21.Oauth21Application - Started Oauth21Application in 0.401 seconds (process running for 1881.271)
+2023-10-27 00:14:56.241 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2023-10-27 00:15:12.800 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-10-27 00:15:12.806 [Thread-7] INFO  io.undertow - stopping server: Undertow - 2.3.10.Final
+2023-10-27 00:15:12.814 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2023-10-27 00:15:12.823 [Thread-7] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2023-10-27 00:15:12.895 [restartedMain] INFO  c.example.oauth21.Oauth21Application - Starting Oauth21Application using Java 17.0.6 with PID 23801 (/Users/kevin/Documents/study_workspace/oauth21/target/classes started by kevin in /Users/kevin/Documents/study_workspace/oauth21)
+2023-10-27 00:15:12.896 [restartedMain] INFO  c.example.oauth21.Oauth21Application - The following 1 profile is active: "dev"
+2023-10-27 00:15:12.971 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-10-27 00:15:12.971 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-10-27 00:15:12.973 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 2 ms. Found 0 Redis repository interfaces.
+2023-10-27 00:15:13.024 [restartedMain] WARN  io.undertow.websockets.jsr - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2023-10-27 00:15:13.025 [restartedMain] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
+2023-10-27 00:15:13.025 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 128 ms
+2023-10-27 00:15:13.070 [restartedMain] WARN  o.s.c.LocalVariableTableParameterNameDiscoverer - Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.oauth21.config.DefaultSecurityConfig
+2023-10-27 00:15:13.075 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Starting...
+2023-10-27 00:15:13.087 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2346be53
+2023-10-27 00:15:13.087 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Start completed.
+2023-10-27 00:15:13.167 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer$$Lambda$901/0x000000080112baf0@32823b58 with [org.springframework.security.web.session.DisableEncodeUrlFilter@45c38700, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6f0f7fe, org.springframework.security.web.context.SecurityContextHolderFilter@c8aa80f, org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.AuthorizationServerContextFilter@4256bc14, org.springframework.security.web.header.HeaderWriterFilter@499738a5, org.springframework.security.web.csrf.CsrfFilter@51f82fda, org.springframework.security.oauth2.server.authorization.oidc.web.OidcLogoutEndpointFilter@792564f, org.springframework.security.web.authentication.logout.LogoutFilter@549a299b, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationServerMetadataEndpointFilter@49821f48, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter@2e8980a9, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceVerificationEndpointFilter@57610ebd, org.springframework.security.oauth2.server.authorization.oidc.web.OidcProviderConfigurationEndpointFilter@d23eaaa, org.springframework.security.oauth2.server.authorization.web.NimbusJwkSetEndpointFilter@50b2784e, org.springframework.security.oauth2.server.authorization.web.OAuth2ClientAuthenticationFilter@4cd121b8, org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter@45076c39, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1c1cc0bb, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7d2b6fe5, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@78e835bd, org.springframework.security.web.access.ExceptionTranslationFilter@7f43d2b7, org.springframework.security.web.access.intercept.AuthorizationFilter@88b34d6, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenEndpointFilter@7ff53c2a, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenIntrospectionEndpointFilter@3a6c1e8d, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenRevocationEndpointFilter@634d2ed7, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceAuthorizationEndpointFilter@12376df, org.springframework.security.oauth2.server.authorization.oidc.web.OidcUserInfoEndpointFilter@1d1d4dec]
+2023-10-27 00:15:13.202 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@64ea5693, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7c02325d, org.springframework.security.web.context.SecurityContextHolderFilter@3f37ae96, org.springframework.security.web.header.HeaderWriterFilter@2dc845a6, org.springframework.security.web.csrf.CsrfFilter@4f709da9, org.springframework.security.web.authentication.logout.LogoutFilter@6a5421b1, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@6164b58d, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@4626a8b3, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2a7650db, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7461e10c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@79ff10b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@380e388d, org.springframework.security.web.access.ExceptionTranslationFilter@5d95c308, org.springframework.security.web.access.intercept.AuthorizationFilter@69a968ec]
+2023-10-27 00:15:13.237 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-10-27 00:15:13.242 [restartedMain] INFO  io.undertow - starting server: Undertow - 2.3.10.Final
+2023-10-27 00:15:13.244 [restartedMain] INFO  o.s.b.w.e.undertow.UndertowWebServer - Undertow started on port(s) 9000 (http)
+2023-10-27 00:15:13.247 [restartedMain] INFO  c.example.oauth21.Oauth21Application - Started Oauth21Application in 0.366 seconds (process running for 1898.278)
+2023-10-27 00:15:13.247 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2023-10-27 00:15:43.964 [File Watcher] INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-10-27 00:15:43.968 [Thread-11] INFO  io.undertow - stopping server: Undertow - 2.3.10.Final
+2023-10-27 00:15:43.979 [Thread-11] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown initiated...
+2023-10-27 00:15:43.984 [Thread-11] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-3 - Shutdown completed.
+2023-10-27 00:15:44.050 [restartedMain] INFO  c.example.oauth21.Oauth21Application - Starting Oauth21Application using Java 17.0.6 with PID 23801 (/Users/kevin/Documents/study_workspace/oauth21/target/classes started by kevin in /Users/kevin/Documents/study_workspace/oauth21)
+2023-10-27 00:15:44.050 [restartedMain] INFO  c.example.oauth21.Oauth21Application - The following 1 profile is active: "dev"
+2023-10-27 00:15:44.135 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-10-27 00:15:44.136 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-10-27 00:15:44.138 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 1 ms. Found 0 Redis repository interfaces.
+2023-10-27 00:15:44.198 [restartedMain] WARN  io.undertow.websockets.jsr - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2023-10-27 00:15:44.199 [restartedMain] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
+2023-10-27 00:15:44.199 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 147 ms
+2023-10-27 00:15:44.243 [restartedMain] WARN  o.s.c.LocalVariableTableParameterNameDiscoverer - Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.oauth21.config.DefaultSecurityConfig
+2023-10-27 00:15:44.249 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Starting...
+2023-10-27 00:15:44.262 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-4 - Added connection com.mysql.cj.jdbc.ConnectionImpl@38caf015
+2023-10-27 00:15:44.262 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Start completed.
+2023-10-27 00:15:44.352 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer$$Lambda$901/0x000000080112baf0@74b4394c with [org.springframework.security.web.session.DisableEncodeUrlFilter@7bf2ae40, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@97b6478, org.springframework.security.web.context.SecurityContextHolderFilter@1e9dabf3, org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.AuthorizationServerContextFilter@534b804a, org.springframework.security.web.header.HeaderWriterFilter@7bcb7a3a, org.springframework.security.web.csrf.CsrfFilter@53e94bea, org.springframework.security.oauth2.server.authorization.oidc.web.OidcLogoutEndpointFilter@2bc36599, org.springframework.security.web.authentication.logout.LogoutFilter@ff9b619, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationServerMetadataEndpointFilter@2f6e3cc0, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter@22249871, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceVerificationEndpointFilter@40e7bdca, org.springframework.security.oauth2.server.authorization.oidc.web.OidcProviderConfigurationEndpointFilter@270ca12a, org.springframework.security.oauth2.server.authorization.web.NimbusJwkSetEndpointFilter@118c7ef8, org.springframework.security.oauth2.server.authorization.web.OAuth2ClientAuthenticationFilter@6d65160b, org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter@21532efd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@73215d1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5cf2e35e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3167976c, org.springframework.security.web.access.ExceptionTranslationFilter@61f75d94, org.springframework.security.web.access.intercept.AuthorizationFilter@53514ee9, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenEndpointFilter@7bdbacda, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenIntrospectionEndpointFilter@3ecb38e4, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenRevocationEndpointFilter@609d9bc1, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceAuthorizationEndpointFilter@66fc60b3, org.springframework.security.oauth2.server.authorization.oidc.web.OidcUserInfoEndpointFilter@2e3f61aa]
+2023-10-27 00:15:44.389 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7355fc55, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2fd6ff5f, org.springframework.security.web.context.SecurityContextHolderFilter@69a6fb69, org.springframework.security.web.header.HeaderWriterFilter@754d9420, org.springframework.security.web.csrf.CsrfFilter@7300e075, org.springframework.security.web.authentication.logout.LogoutFilter@cad84c4, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@4ea5689b, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@6e960031, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2ece5222, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1d51bd60, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4bfb2184, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4a52ab8e, org.springframework.security.web.access.ExceptionTranslationFilter@5ea11bbd, org.springframework.security.web.access.intercept.AuthorizationFilter@e627789]
+2023-10-27 00:15:44.420 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-10-27 00:15:44.429 [restartedMain] INFO  io.undertow - starting server: Undertow - 2.3.10.Final
+2023-10-27 00:15:44.431 [restartedMain] INFO  o.s.b.w.e.undertow.UndertowWebServer - Undertow started on port(s) 9000 (http)
+2023-10-27 00:15:44.433 [restartedMain] INFO  c.example.oauth21.Oauth21Application - Started Oauth21Application in 0.402 seconds (process running for 1929.465)
+2023-10-27 00:15:44.433 [restartedMain] INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2023-10-27 00:15:54.536 [SpringApplicationShutdownHook] INFO  io.undertow - stopping server: Undertow - 2.3.10.Final
+2023-10-27 00:15:54.538 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Shutdown initiated...
+2023-10-27 00:15:54.540 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-4 - Shutdown completed.
+2023-10-27 00:15:55.929 [restartedMain] INFO  c.example.oauth21.Oauth21Application - Starting Oauth21Application using Java 17.0.6 with PID 29003 (/Users/kevin/Documents/study_workspace/oauth21/target/classes started by kevin in /Users/kevin/Documents/study_workspace/oauth21)
+2023-10-27 00:15:55.930 [restartedMain] INFO  c.example.oauth21.Oauth21Application - The following 1 profile is active: "dev"
+2023-10-27 00:15:55.951 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-10-27 00:15:55.952 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-10-27 00:15:56.253 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-10-27 00:15:56.254 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-10-27 00:15:56.268 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 7 ms. Found 0 Redis repository interfaces.
+2023-10-27 00:15:56.542 [restartedMain] WARN  io.undertow.websockets.jsr - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2023-10-27 00:15:56.550 [restartedMain] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
+2023-10-27 00:15:56.550 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 598 ms
+2023-10-27 00:15:56.706 [restartedMain] WARN  o.s.c.LocalVariableTableParameterNameDiscoverer - Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.oauth21.config.DefaultSecurityConfig
+2023-10-27 00:15:56.834 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-10-27 00:15:56.987 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5bb91562
+2023-10-27 00:15:56.988 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-10-27 00:15:57.314 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer$$Lambda$901/0x00000008011224f8@1ad859ef with [org.springframework.security.web.session.DisableEncodeUrlFilter@67b87c3c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@32ca34df, org.springframework.security.web.context.SecurityContextHolderFilter@b5e5925, org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.AuthorizationServerContextFilter@4207e0fd, org.springframework.security.web.header.HeaderWriterFilter@47b23b45, org.springframework.security.web.csrf.CsrfFilter@2b975271, org.springframework.security.oauth2.server.authorization.oidc.web.OidcLogoutEndpointFilter@3767a1c, org.springframework.security.web.authentication.logout.LogoutFilter@1a67135d, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationServerMetadataEndpointFilter@3bdfda54, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter@272ce2d, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceVerificationEndpointFilter@1fbd6ede, org.springframework.security.oauth2.server.authorization.oidc.web.OidcProviderConfigurationEndpointFilter@4a9b702f, org.springframework.security.oauth2.server.authorization.web.NimbusJwkSetEndpointFilter@11b5a1f8, org.springframework.security.oauth2.server.authorization.web.OAuth2ClientAuthenticationFilter@31ea742b, org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter@377c4b67, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5586b8db, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7db2387, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3e05c38e, org.springframework.security.web.access.ExceptionTranslationFilter@7a1c885f, org.springframework.security.web.access.intercept.AuthorizationFilter@4254055b, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenEndpointFilter@572e8fe0, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenIntrospectionEndpointFilter@1af54319, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenRevocationEndpointFilter@3f7c78e9, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceAuthorizationEndpointFilter@45eb723, org.springframework.security.oauth2.server.authorization.oidc.web.OidcUserInfoEndpointFilter@3d3505ee]
+2023-10-27 00:15:57.463 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6b1df449, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5042f7c5, org.springframework.security.web.context.SecurityContextHolderFilter@5466c355, org.springframework.security.web.header.HeaderWriterFilter@6bd4124b, org.springframework.security.web.csrf.CsrfFilter@3b78af6a, org.springframework.security.web.authentication.logout.LogoutFilter@550bd007, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@3c21e3ee, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@720d5a70, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@57b3b78, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2a1b254c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7c18d249, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@634f50b0, org.springframework.security.web.access.ExceptionTranslationFilter@232ebf71, org.springframework.security.web.access.intercept.AuthorizationFilter@1c79bab5]
+2023-10-27 00:15:57.684 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-10-27 00:15:57.706 [restartedMain] INFO  io.undertow - starting server: Undertow - 2.3.10.Final
+2023-10-27 00:15:57.710 [restartedMain] INFO  org.xnio - XNIO version 3.8.8.Final
+2023-10-27 00:15:57.716 [restartedMain] INFO  org.xnio.nio - XNIO NIO Implementation Version 3.8.8.Final
+2023-10-27 00:15:57.741 [restartedMain] INFO  org.jboss.threads - JBoss Threads version 3.5.0.Final
+2023-10-27 00:15:57.778 [restartedMain] INFO  o.s.b.w.e.undertow.UndertowWebServer - Undertow started on port(s) 9000 (http)
+2023-10-27 00:15:57.787 [restartedMain] INFO  c.example.oauth21.Oauth21Application - Started Oauth21Application in 2.072 seconds (process running for 2.356)
+2023-10-27 00:16:04.118 [XNIO-1 task-2] INFO  io.undertow.servlet - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-10-27 00:16:04.118 [XNIO-1 task-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-10-27 00:16:04.121 [XNIO-1 task-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2023-10-27 00:16:45.775 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - Starting DefaultAuthorizationServerApplicationTests using Java 17.0.6 with PID 29131 (started by kevin in /Users/kevin/Documents/study_workspace/oauth21)
+2023-10-27 00:16:45.776 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - The following 1 profile is active: "dev"
+2023-10-27 00:16:46.078 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-10-27 00:16:46.079 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-10-27 00:16:46.096 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
+2023-10-27 00:16:46.400 [main] WARN  io.undertow.websockets.jsr - UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2023-10-27 00:16:46.408 [main] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
+2023-10-27 00:16:46.408 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 624 ms
+2023-10-27 00:16:46.588 [main] WARN  o.s.c.LocalVariableTableParameterNameDiscoverer - Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.example.oauth21.config.DefaultSecurityConfig
+2023-10-27 00:16:46.715 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-10-27 00:16:46.885 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@111cbcda
+2023-10-27 00:16:46.885 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-10-27 00:16:47.055 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer$$Lambda$1186/0x0000000801155db8@a251135 with [org.springframework.security.web.session.DisableEncodeUrlFilter@70819ba8, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@446a692f, org.springframework.security.web.context.SecurityContextHolderFilter@2f3a8166, org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.AuthorizationServerContextFilter@25435731, org.springframework.security.web.header.HeaderWriterFilter@48c3a0ef, org.springframework.security.web.csrf.CsrfFilter@30ed4034, org.springframework.security.oauth2.server.authorization.oidc.web.OidcLogoutEndpointFilter@75c8d8e7, org.springframework.security.web.authentication.logout.LogoutFilter@5a58db42, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationServerMetadataEndpointFilter@69fd99c1, org.springframework.security.oauth2.server.authorization.web.OAuth2AuthorizationEndpointFilter@706d2bae, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceVerificationEndpointFilter@62ee1c89, org.springframework.security.oauth2.server.authorization.oidc.web.OidcProviderConfigurationEndpointFilter@43de9fc9, org.springframework.security.oauth2.server.authorization.web.NimbusJwkSetEndpointFilter@49f1184e, org.springframework.security.oauth2.server.authorization.web.OAuth2ClientAuthenticationFilter@2bc8caa7, org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter@20c283b4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5e3405a1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@21ce3b22, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@283ecb4b, org.springframework.security.web.access.ExceptionTranslationFilter@180f33b2, org.springframework.security.web.access.intercept.AuthorizationFilter@39ac8c0c, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenEndpointFilter@5f35370b, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenIntrospectionEndpointFilter@631678e6, org.springframework.security.oauth2.server.authorization.web.OAuth2TokenRevocationEndpointFilter@652a1a17, org.springframework.security.oauth2.server.authorization.web.OAuth2DeviceAuthorizationEndpointFilter@81dfdee, org.springframework.security.oauth2.server.authorization.oidc.web.OidcUserInfoEndpointFilter@788a0513]
+2023-10-27 00:16:47.173 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2079fcfc, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@77401977, org.springframework.security.web.context.SecurityContextHolderFilter@3186f8f5, org.springframework.security.web.header.HeaderWriterFilter@3f3f554f, org.springframework.security.web.csrf.CsrfFilter@6c737fdb, org.springframework.security.web.authentication.logout.LogoutFilter@2a341e3d, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@3e1897d, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@7cdb05aa, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4a773f08, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@467cd4b9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@69a3bf40, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7865cc83, org.springframework.security.web.access.ExceptionTranslationFilter@66a93b25, org.springframework.security.web.access.intercept.AuthorizationFilter@7ee02968]
+2023-10-27 00:16:47.288 [main] INFO  io.undertow.servlet - Initializing Spring TestDispatcherServlet ''
+2023-10-27 00:16:47.288 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-10-27 00:16:47.289 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 1 ms
+2023-10-27 00:16:47.515 [main] INFO  io.undertow - starting server: Undertow - 2.3.10.Final
+2023-10-27 00:16:47.519 [main] INFO  org.xnio - XNIO version 3.8.8.Final
+2023-10-27 00:16:47.522 [main] INFO  org.xnio.nio - XNIO NIO Implementation Version 3.8.8.Final
+2023-10-27 00:16:47.561 [main] INFO  org.jboss.threads - JBoss Threads version 3.5.0.Final
+2023-10-27 00:16:47.585 [main] INFO  o.s.b.w.e.undertow.UndertowWebServer - Undertow started on port(s) 57512 (http)
+2023-10-27 00:16:47.592 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - Started DefaultAuthorizationServerApplicationTests in 2.004 seconds (process running for 2.435)
+2023-10-27 00:16:48.076 [main] INFO  c.e.o.DefaultAuthorizationServerApplicationTests - {"user_code":"MFRK-SJKF","device_code":"31jao61TN2s80rfrvFwfKFnlMTq37n8tdTAnyevHZNoDDABp1qFkutxDplOHeXCknVTBIyC6E1i0TXYrQRwK6Aqi1ldLw4MQou0efvBsP31AKqEG0IeCwgfOTV77RHg-","verification_uri_complete":"http://localhost:9000/activate?user_code=MFRK-SJKF","verification_uri":"http://localhost:9000/activate","expires_in":300}
+2023-10-27 00:16:48.083 [SpringApplicationShutdownHook] INFO  io.undertow - stopping server: Undertow - 2.3.10.Final
+2023-10-27 00:16:48.092 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-10-27 00:16:48.098 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-10-27 00:18:47.489 [XNIO-1 task-4] ERROR io.undertow.request - UT005023: Exception handling request to /login/oauth2/code/github-idp
+java.lang.IllegalStateException: Session was invalidated
+	at org.springframework.session.data.redis.RedisSessionRepository.save(RedisSessionRepository.java:122)
+	at org.springframework.session.data.redis.RedisSessionRepository.save(RedisSessionRepository.java:42)
+	at org.springframework.session.web.http.SessionRepositoryFilter$SessionRepositoryRequestWrapper.commitSession(SessionRepositoryFilter.java:228)
+	at org.springframework.session.web.http.SessionRepositoryFilter.doFilterInternal(SessionRepositoryFilter.java:146)
+	at org.springframework.session.web.http.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:82)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:67)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:67)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at io.undertow.servlet.handlers.FilterHandler.handleRequest(FilterHandler.java:84)
+	at io.undertow.servlet.handlers.security.ServletSecurityRoleHandler.handleRequest(ServletSecurityRoleHandler.java:62)
+	at io.undertow.servlet.handlers.ServletChain$1.handleRequest(ServletChain.java:68)
+	at io.undertow.servlet.handlers.ServletDispatchingHandler.handleRequest(ServletDispatchingHandler.java:36)
+	at io.undertow.servlet.handlers.RedirectDirHandler.handleRequest(RedirectDirHandler.java:68)
+	at io.undertow.servlet.handlers.security.SSLInformationAssociationHandler.handleRequest(SSLInformationAssociationHandler.java:117)
+	at io.undertow.servlet.handlers.security.ServletAuthenticationCallHandler.handleRequest(ServletAuthenticationCallHandler.java:57)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.security.handlers.AbstractConfidentialityHandler.handleRequest(AbstractConfidentialityHandler.java:46)
+	at io.undertow.servlet.handlers.security.ServletConfidentialityConstraintHandler.handleRequest(ServletConfidentialityConstraintHandler.java:64)
+	at io.undertow.security.handlers.AuthenticationMechanismsHandler.handleRequest(AuthenticationMechanismsHandler.java:60)
+	at io.undertow.servlet.handlers.security.CachedAuthenticatedSessionHandler.handleRequest(CachedAuthenticatedSessionHandler.java:77)
+	at io.undertow.security.handlers.AbstractSecurityContextAssociationHandler.handleRequest(AbstractSecurityContextAssociationHandler.java:43)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.servlet.handlers.SendErrorPageHandler.handleRequest(SendErrorPageHandler.java:52)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.servlet.handlers.SessionRestoringHandler.handleRequest(SessionRestoringHandler.java:119)
+	at io.undertow.servlet.handlers.ServletInitialHandler.handleFirstRequest(ServletInitialHandler.java:276)
+	at io.undertow.servlet.handlers.ServletInitialHandler$2.call(ServletInitialHandler.java:135)
+	at io.undertow.servlet.handlers.ServletInitialHandler$2.call(ServletInitialHandler.java:132)
+	at io.undertow.servlet.core.ServletRequestContextThreadSetupAction$1.call(ServletRequestContextThreadSetupAction.java:48)
+	at io.undertow.servlet.core.ContextClassLoaderSetupAction$1.call(ContextClassLoaderSetupAction.java:43)
+	at io.undertow.servlet.handlers.ServletInitialHandler.dispatchRequest(ServletInitialHandler.java:256)
+	at io.undertow.servlet.handlers.ServletInitialHandler$1.handleRequest(ServletInitialHandler.java:101)
+	at io.undertow.server.Connectors.executeRootHandler(Connectors.java:393)
+	at io.undertow.server.HttpServerExchange$1.run(HttpServerExchange.java:859)
+	at org.jboss.threads.ContextHandler$1.runWith(ContextHandler.java:18)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.run(EnhancedQueueExecutor.java:2513)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1538)
+	at org.xnio.XnioWorker$WorkerThreadFactory$1$1.run(XnioWorker.java:1282)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-10-27 00:18:47.501 [XNIO-1 task-4] ERROR io.undertow.request - UT005022: Exception generating error page /error
+java.lang.RuntimeException: java.lang.IllegalStateException: Session was invalidated
+	at io.undertow.servlet.spec.RequestDispatcherImpl.error(RequestDispatcherImpl.java:418)
+	at io.undertow.servlet.spec.RequestDispatcherImpl.error(RequestDispatcherImpl.java:372)
+	at io.undertow.servlet.handlers.ServletInitialHandler.handleFirstRequest(ServletInitialHandler.java:315)
+	at io.undertow.servlet.handlers.ServletInitialHandler$2.call(ServletInitialHandler.java:135)
+	at io.undertow.servlet.handlers.ServletInitialHandler$2.call(ServletInitialHandler.java:132)
+	at io.undertow.servlet.core.ServletRequestContextThreadSetupAction$1.call(ServletRequestContextThreadSetupAction.java:48)
+	at io.undertow.servlet.core.ContextClassLoaderSetupAction$1.call(ContextClassLoaderSetupAction.java:43)
+	at io.undertow.servlet.handlers.ServletInitialHandler.dispatchRequest(ServletInitialHandler.java:256)
+	at io.undertow.servlet.handlers.ServletInitialHandler$1.handleRequest(ServletInitialHandler.java:101)
+	at io.undertow.server.Connectors.executeRootHandler(Connectors.java:393)
+	at io.undertow.server.HttpServerExchange$1.run(HttpServerExchange.java:859)
+	at org.jboss.threads.ContextHandler$1.runWith(ContextHandler.java:18)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.run(EnhancedQueueExecutor.java:2513)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1538)
+	at org.xnio.XnioWorker$WorkerThreadFactory$1$1.run(XnioWorker.java:1282)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: java.lang.IllegalStateException: Session was invalidated
+	at org.springframework.session.data.redis.RedisSessionRepository.save(RedisSessionRepository.java:122)
+	at org.springframework.session.data.redis.RedisSessionRepository.save(RedisSessionRepository.java:42)
+	at org.springframework.session.web.http.SessionRepositoryFilter$SessionRepositoryRequestWrapper.commitSession(SessionRepositoryFilter.java:228)
+	at org.springframework.session.web.http.SessionRepositoryFilter.doFilterInternal(SessionRepositoryFilter.java:146)
+	at org.springframework.session.web.http.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:82)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:67)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:67)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at io.undertow.servlet.handlers.FilterHandler.handleRequest(FilterHandler.java:84)
+	at io.undertow.servlet.handlers.security.ServletSecurityRoleHandler.handleRequest(ServletSecurityRoleHandler.java:62)
+	at io.undertow.servlet.handlers.ServletChain$1.handleRequest(ServletChain.java:68)
+	at io.undertow.servlet.handlers.ServletDispatchingHandler.handleRequest(ServletDispatchingHandler.java:36)
+	at io.undertow.servlet.handlers.RedirectDirHandler.handleRequest(RedirectDirHandler.java:68)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.servlet.handlers.SessionRestoringHandler.handleRequest(SessionRestoringHandler.java:119)
+	at io.undertow.servlet.handlers.ServletInitialHandler.dispatchRequest(ServletInitialHandler.java:258)
+	at io.undertow.servlet.handlers.ServletInitialHandler.dispatchToPath(ServletInitialHandler.java:183)
+	at io.undertow.servlet.spec.RequestDispatcherImpl.error(RequestDispatcherImpl.java:414)
+	... 15 common frames omitted
+2023-10-27 00:19:41.966 [XNIO-1 task-2] ERROR io.undertow.request - UT005023: Exception handling request to /login/oauth2/code/github-idp
+java.lang.IllegalStateException: Session was invalidated
+	at org.springframework.session.data.redis.RedisSessionRepository.save(RedisSessionRepository.java:122)
+	at org.springframework.session.data.redis.RedisSessionRepository.save(RedisSessionRepository.java:42)
+	at org.springframework.session.web.http.SessionRepositoryFilter$SessionRepositoryRequestWrapper.commitSession(SessionRepositoryFilter.java:228)
+	at org.springframework.session.web.http.SessionRepositoryFilter.doFilterInternal(SessionRepositoryFilter.java:146)
+	at org.springframework.session.web.http.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:82)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:67)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:67)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at io.undertow.servlet.handlers.FilterHandler.handleRequest(FilterHandler.java:84)
+	at io.undertow.servlet.handlers.security.ServletSecurityRoleHandler.handleRequest(ServletSecurityRoleHandler.java:62)
+	at io.undertow.servlet.handlers.ServletChain$1.handleRequest(ServletChain.java:68)
+	at io.undertow.servlet.handlers.ServletDispatchingHandler.handleRequest(ServletDispatchingHandler.java:36)
+	at io.undertow.servlet.handlers.RedirectDirHandler.handleRequest(RedirectDirHandler.java:68)
+	at io.undertow.servlet.handlers.security.SSLInformationAssociationHandler.handleRequest(SSLInformationAssociationHandler.java:117)
+	at io.undertow.servlet.handlers.security.ServletAuthenticationCallHandler.handleRequest(ServletAuthenticationCallHandler.java:57)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.security.handlers.AbstractConfidentialityHandler.handleRequest(AbstractConfidentialityHandler.java:46)
+	at io.undertow.servlet.handlers.security.ServletConfidentialityConstraintHandler.handleRequest(ServletConfidentialityConstraintHandler.java:64)
+	at io.undertow.security.handlers.AuthenticationMechanismsHandler.handleRequest(AuthenticationMechanismsHandler.java:60)
+	at io.undertow.servlet.handlers.security.CachedAuthenticatedSessionHandler.handleRequest(CachedAuthenticatedSessionHandler.java:77)
+	at io.undertow.security.handlers.AbstractSecurityContextAssociationHandler.handleRequest(AbstractSecurityContextAssociationHandler.java:43)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.servlet.handlers.SendErrorPageHandler.handleRequest(SendErrorPageHandler.java:52)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.servlet.handlers.SessionRestoringHandler.handleRequest(SessionRestoringHandler.java:119)
+	at io.undertow.servlet.handlers.ServletInitialHandler.handleFirstRequest(ServletInitialHandler.java:276)
+	at io.undertow.servlet.handlers.ServletInitialHandler$2.call(ServletInitialHandler.java:135)
+	at io.undertow.servlet.handlers.ServletInitialHandler$2.call(ServletInitialHandler.java:132)
+	at io.undertow.servlet.core.ServletRequestContextThreadSetupAction$1.call(ServletRequestContextThreadSetupAction.java:48)
+	at io.undertow.servlet.core.ContextClassLoaderSetupAction$1.call(ContextClassLoaderSetupAction.java:43)
+	at io.undertow.servlet.handlers.ServletInitialHandler.dispatchRequest(ServletInitialHandler.java:256)
+	at io.undertow.servlet.handlers.ServletInitialHandler$1.handleRequest(ServletInitialHandler.java:101)
+	at io.undertow.server.Connectors.executeRootHandler(Connectors.java:393)
+	at io.undertow.server.HttpServerExchange$1.run(HttpServerExchange.java:859)
+	at org.jboss.threads.ContextHandler$1.runWith(ContextHandler.java:18)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.run(EnhancedQueueExecutor.java:2513)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1538)
+	at org.xnio.XnioWorker$WorkerThreadFactory$1$1.run(XnioWorker.java:1282)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-10-27 00:19:41.969 [XNIO-1 task-2] ERROR io.undertow.request - UT005022: Exception generating error page /error
+java.lang.RuntimeException: java.lang.IllegalStateException: Session was invalidated
+	at io.undertow.servlet.spec.RequestDispatcherImpl.error(RequestDispatcherImpl.java:418)
+	at io.undertow.servlet.spec.RequestDispatcherImpl.error(RequestDispatcherImpl.java:372)
+	at io.undertow.servlet.handlers.ServletInitialHandler.handleFirstRequest(ServletInitialHandler.java:315)
+	at io.undertow.servlet.handlers.ServletInitialHandler$2.call(ServletInitialHandler.java:135)
+	at io.undertow.servlet.handlers.ServletInitialHandler$2.call(ServletInitialHandler.java:132)
+	at io.undertow.servlet.core.ServletRequestContextThreadSetupAction$1.call(ServletRequestContextThreadSetupAction.java:48)
+	at io.undertow.servlet.core.ContextClassLoaderSetupAction$1.call(ContextClassLoaderSetupAction.java:43)
+	at io.undertow.servlet.handlers.ServletInitialHandler.dispatchRequest(ServletInitialHandler.java:256)
+	at io.undertow.servlet.handlers.ServletInitialHandler$1.handleRequest(ServletInitialHandler.java:101)
+	at io.undertow.server.Connectors.executeRootHandler(Connectors.java:393)
+	at io.undertow.server.HttpServerExchange$1.run(HttpServerExchange.java:859)
+	at org.jboss.threads.ContextHandler$1.runWith(ContextHandler.java:18)
+	at org.jboss.threads.EnhancedQueueExecutor$Task.run(EnhancedQueueExecutor.java:2513)
+	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1538)
+	at org.xnio.XnioWorker$WorkerThreadFactory$1$1.run(XnioWorker.java:1282)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: java.lang.IllegalStateException: Session was invalidated
+	at org.springframework.session.data.redis.RedisSessionRepository.save(RedisSessionRepository.java:122)
+	at org.springframework.session.data.redis.RedisSessionRepository.save(RedisSessionRepository.java:42)
+	at org.springframework.session.web.http.SessionRepositoryFilter$SessionRepositoryRequestWrapper.commitSession(SessionRepositoryFilter.java:228)
+	at org.springframework.session.web.http.SessionRepositoryFilter.doFilterInternal(SessionRepositoryFilter.java:146)
+	at org.springframework.session.web.http.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:82)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:67)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101)
+	at io.undertow.servlet.core.ManagedFilter.doFilter(ManagedFilter.java:67)
+	at io.undertow.servlet.handlers.FilterHandler$FilterChainImpl.doFilter(FilterHandler.java:131)
+	at io.undertow.servlet.handlers.FilterHandler.handleRequest(FilterHandler.java:84)
+	at io.undertow.servlet.handlers.security.ServletSecurityRoleHandler.handleRequest(ServletSecurityRoleHandler.java:62)
+	at io.undertow.servlet.handlers.ServletChain$1.handleRequest(ServletChain.java:68)
+	at io.undertow.servlet.handlers.ServletDispatchingHandler.handleRequest(ServletDispatchingHandler.java:36)
+	at io.undertow.servlet.handlers.RedirectDirHandler.handleRequest(RedirectDirHandler.java:68)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.server.handlers.PredicateHandler.handleRequest(PredicateHandler.java:43)
+	at io.undertow.servlet.handlers.SessionRestoringHandler.handleRequest(SessionRestoringHandler.java:119)
+	at io.undertow.servlet.handlers.ServletInitialHandler.dispatchRequest(ServletInitialHandler.java:258)
+	at io.undertow.servlet.handlers.ServletInitialHandler.dispatchToPath(ServletInitialHandler.java:183)
+	at io.undertow.servlet.spec.RequestDispatcherImpl.error(RequestDispatcherImpl.java:414)
+	... 15 common frames omitted

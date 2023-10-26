@@ -132,7 +132,7 @@ public class DefaultAuthorizationServerApplicationTests {
     @SneakyThrows
     @DisplayName("授权码模式")
     public void testCodeMode(){
-        String url = "localhost:9000/oauth2/authorize?client_id=messaging-client&response_type=code&scope=openid&state=aaabbccdd&redirect_uri=http%3A%2F%2F127.0.0.1%3A8080%2Fauthorized";
+        String url = "http://localhost:9000/oauth2/authorize?client_id=messaging-client&response_type=code&scope=openid&state=aaabbccdd&redirect_uri=http%3A%2F%2F127.0.0.1%3A8080%2Fauthorized";
 
         //如下是回调方url响应逻辑
         String demo = """
