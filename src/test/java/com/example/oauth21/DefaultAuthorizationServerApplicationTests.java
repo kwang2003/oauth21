@@ -3,6 +3,9 @@ package com.example.oauth21;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
+import com.nimbusds.jose.shaded.gson.Gson;
+import com.nimbusds.jose.shaded.gson.GsonBuilder;
+import com.nimbusds.jose.shaded.gson.JsonObject;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
@@ -20,6 +23,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -199,4 +204,53 @@ public class DefaultAuthorizationServerApplicationTests {
         //再在浏览器输入
         //http://localhost:9000/activate
     }
+
+    @Test
+    @SneakyThrows
+    @DisplayName("密码认证模式")
+    void testPassword(){
+        String clientId = "messaging-client";
+        HttpClient httpClient = HttpClients.createDefault();
+        HttpPost post = new HttpPost(AUTHORIZATION_TOKEN_ENDPOINT);
+        post.setHeader("Content-Type", "application/x-www-form-urlencoded");
+        List<NameValuePair> params = Lists.newLinkedList();
+        params.add(new BasicNameValuePair(OAuth2ParameterNames.CLIENT_ID,clientId));
+        params.add(new BasicNameValuePair(OAuth2ParameterNames.CLIENT_SECRET,"secret"));
+        params.add(new BasicNameValuePair(OAuth2ParameterNames.GRANT_TYPE, AuthorizationGrantType.PASSWORD.getValue()));
+        params.add(new BasicNameValuePair(OAuth2ParameterNames.SCOPE,"message.read"));
+        params.add(new BasicNameValuePair(OAuth2ParameterNames.USERNAME,"admin"));
+        params.add(new BasicNameValuePair(OAuth2ParameterNames.PASSWORD,"111111"));
+        post.setEntity(new UrlEncodedFormEntity(params, StandardCharsets.UTF_8));
+        HttpEntity entity = httpClient.execute(post).getEntity();
+        String response = EntityUtils.toString(entity,Charsets.UTF_8);
+        log.info("#############################");
+        log.info(response);
+        log.info("#############################");
+
+
+        // 测试refresh_token
+        Gson gson = new GsonBuilder().create();
+        JsonObject json = gson.fromJson(response, JsonObject.class);
+        String refreshToken = json.get("refresh_token").getAsString();
+        log.info("{}",refreshToken);
+        performRefreshTokenRequest(refreshToken);
+    }
+
+    @SneakyThrows
+    private void performRefreshTokenRequest(String refreshToken){
+        HttpClient httpClient = HttpClients.createDefault();
+        HttpPost post = new HttpPost(AUTHORIZATION_TOKEN_ENDPOINT);
+        post.setHeader("Content-Type", "application/x-www-form-urlencoded");
+        List<NameValuePair> params = Lists.newLinkedList();
+        String clientId = "messaging-client";
+        params.add(new BasicNameValuePair(OAuth2ParameterNames.CLIENT_ID,clientId));
+        params.add(new BasicNameValuePair(OAuth2ParameterNames.CLIENT_SECRET,"secret"));
+        params.add(new BasicNameValuePair(OAuth2ParameterNames.GRANT_TYPE, AuthorizationGrantType.REFRESH_TOKEN.getValue()));
+        params.add(new BasicNameValuePair(OAuth2ParameterNames.REFRESH_TOKEN,refreshToken));
+        post.setEntity(new UrlEncodedFormEntity(params, StandardCharsets.UTF_8));
+        HttpEntity entity = httpClient.execute(post).getEntity();
+        String response = EntityUtils.toString(entity,Charsets.UTF_8);
+        log.info("{}",response);
+    }
+
 }

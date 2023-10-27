@@ -1,7 +1,10 @@
 package com.example.oauth21.config;
 
+import com.example.oauth21.authentication.OAuth2ConfigurerUtils;
 import com.example.oauth21.authentication.device.DeviceClientAuthenticationProvider;
 import com.example.oauth21.authentication.device.web.DeviceClientAuthenticationConverter;
+import com.example.oauth21.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationProvider;
+import com.example.oauth21.authentication.password.web.OAuth2ResourceOwnerPasswordAuthenticationConverter;
 import com.example.oauth21.service.OidcUserInfoService;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -13,12 +16,12 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames;
@@ -41,6 +44,7 @@ import org.springframework.security.oauth2.server.authorization.settings.OAuth2T
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
+import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
@@ -65,7 +69,8 @@ public class AuthorizationServerConfig {
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain authorizationServerSecurityFilterChain(
             HttpSecurity http, RegisteredClientRepository registeredClientRepository,
-            AuthorizationServerSettings authorizationServerSettings) throws Exception {
+            AuthorizationServerSettings authorizationServerSettings,
+            OAuth2AuthorizationService oAuth2AuthorizationService,AuthenticationManager authenticationManager) throws Exception {
         //默认全局配置
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
         http
@@ -79,6 +84,8 @@ public class AuthorizationServerConfig {
                         oauth2ResourceServer.jwt(Customizer.withDefaults()));
         http.setSharedObject(RegisteredClientRepository.class,registeredClientRepository);
         http.setSharedObject(AuthorizationServerSettings.class,authorizationServerSettings);
+        http.setSharedObject(OAuth2AuthorizationService.class,oAuth2AuthorizationService);
+        http.setSharedObject(AuthenticationManager.class,authenticationManager);
 
         // grant_type=device_code
         deviceCodeConfig(http);
@@ -86,7 +93,21 @@ public class AuthorizationServerConfig {
         // 启用openid
         openidConfig(http);
 
+        // grant_type=password
+        passwordConfig(http);
+
         return http.build();
+    }
+
+    private void passwordConfig(HttpSecurity http){
+        AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
+        OAuth2AuthorizationService authorizationService = http.getSharedObject(OAuth2AuthorizationService.class);
+        OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator = OAuth2ConfigurerUtils.getTokenGenerator(http);
+        http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
+                .tokenEndpoint(endpoint ->{
+                    endpoint.accessTokenRequestConverter(new OAuth2ResourceOwnerPasswordAuthenticationConverter());
+                    endpoint.authenticationProvider(new OAuth2ResourceOwnerPasswordAuthenticationProvider(authenticationManager,authorizationService,tokenGenerator));
+                });
     }
 
     private void openidConfig(HttpSecurity http){
@@ -139,6 +160,7 @@ public class AuthorizationServerConfig {
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                .authorizationGrantType(AuthorizationGrantType.PASSWORD)
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_JWT)
@@ -232,9 +254,5 @@ public class AuthorizationServerConfig {
                 }
             };
         };
-    }
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }

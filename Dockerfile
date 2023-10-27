@@ -2,6 +2,7 @@
 # FROM adoptopenjdk:17-jdk-hotspot
 FROM openjdk:17
 
+# JAVA_OPS参数可以通过k8s命令行传入覆盖
 ENV JAVA_OPTS="-Xms128m -Xmx128m"
 ENV LANG=zh_CN.UTF-8
 # 设置上海时区，否则日志输出的时间是UTC时间
