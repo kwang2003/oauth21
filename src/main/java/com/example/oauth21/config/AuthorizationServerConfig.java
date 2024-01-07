@@ -5,7 +5,6 @@ import com.example.oauth21.authentication.device.DeviceClientAuthenticationProvi
 import com.example.oauth21.authentication.device.web.DeviceClientAuthenticationConverter;
 import com.example.oauth21.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationProvider;
 import com.example.oauth21.authentication.password.web.OAuth2ResourceOwnerPasswordAuthenticationConverter;
-import com.example.oauth21.service.OidcUserInfoService;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
@@ -24,7 +23,6 @@ import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
-import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames;
 import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.authorization.JdbcOAuth2AuthorizationConsentService;
@@ -42,8 +40,6 @@ import org.springframework.security.oauth2.server.authorization.settings.Authori
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.settings.OAuth2TokenFormat;
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
-import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
-import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.web.SecurityFilterChain;
@@ -234,25 +230,5 @@ public class AuthorizationServerConfig {
     @Bean
     public AuthorizationServerSettings authorizationServerSettings() {
         return AuthorizationServerSettings.builder().build();
-    }
-    @Bean
-    public OAuth2TokenCustomizer<JwtEncodingContext> tokenCustomizer(
-            OidcUserInfoService userInfoService) {
-        return (context) -> {
-             switch (context.getTokenType().getValue()){
-                case OidcParameterNames.ID_TOKEN ->{
-                    OidcUserInfo userInfo = userInfoService.loadUser(
-                            context.getPrincipal().getName());
-                    context.getClaims().claims(claims ->
-                            claims.putAll(userInfo.getClaims()));
-                }
-                case "access_token" ->{
-                    context.getClaims().claims((claims) -> {
-                        claims.put("claim-1", "value-1");
-                        claims.put("claim-2", "value-2");
-                    });
-                }
-            };
-        };
     }
 }
