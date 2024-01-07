@@ -176,7 +176,6 @@
                 <version>4.9.10</version>
                 <executions>
                     <execution>
-                        <id>get-the-git-infos</id>
                         <goals>
                             <goal>revision</goal>
                         </goals>
@@ -184,17 +183,13 @@
                 </executions>
 
                 <configuration>
+                    <dateFormat>yyyy-MM-dd HH:mm:ss</dateFormat>
                     <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
                     <prefix>git</prefix>
-                    <verbose>false</verbose>
+                    <verbose>true</verbose>
                     <generateGitPropertiesFile>true</generateGitPropertiesFile>
                     <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
                     <format>properties</format>
-                    <gitDescribe>
-                        <skip>false</skip>
-                        <always>false</always>
-                        <dirty>-dirty</dirty>
-                    </gitDescribe>
                 </configuration>
             </plugin>
         </plugins>
