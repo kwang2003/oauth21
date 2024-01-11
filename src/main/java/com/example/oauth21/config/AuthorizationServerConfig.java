@@ -5,6 +5,9 @@ import com.example.oauth21.authentication.device.DeviceClientAuthenticationProvi
 import com.example.oauth21.authentication.device.web.DeviceClientAuthenticationConverter;
 import com.example.oauth21.authentication.password.OAuth2ResourceOwnerPasswordAuthenticationProvider;
 import com.example.oauth21.authentication.password.web.OAuth2ResourceOwnerPasswordAuthenticationConverter;
+import com.example.oauth21.authentication.sms.OAuth2SmsAuthenticationProvider;
+import com.example.oauth21.authentication.sms.OAuth2SmsConstant;
+import com.example.oauth21.authentication.sms.web.OAuth2SmsAuthenticationConverter;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
@@ -13,11 +16,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.OAuth2Token;
@@ -66,7 +72,11 @@ public class AuthorizationServerConfig {
     public SecurityFilterChain authorizationServerSecurityFilterChain(
             HttpSecurity http, RegisteredClientRepository registeredClientRepository,
             AuthorizationServerSettings authorizationServerSettings,
-            OAuth2AuthorizationService oAuth2AuthorizationService,AuthenticationManager authenticationManager) throws Exception {
+            OAuth2AuthorizationService oAuth2AuthorizationService,
+            AuthenticationManager authenticationManager,
+            StringRedisTemplate stringRedisTemplate,
+            UserDetailsService userDetailsService,
+            PasswordEncoder passwordEncoder) throws Exception {
         //默认全局配置
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
         http
@@ -82,6 +92,9 @@ public class AuthorizationServerConfig {
         http.setSharedObject(AuthorizationServerSettings.class,authorizationServerSettings);
         http.setSharedObject(OAuth2AuthorizationService.class,oAuth2AuthorizationService);
         http.setSharedObject(AuthenticationManager.class,authenticationManager);
+        http.setSharedObject(StringRedisTemplate.class,stringRedisTemplate);
+        http.setSharedObject(UserDetailsService.class,userDetailsService);
+        http.setSharedObject(PasswordEncoder.class,passwordEncoder);
 
         // grant_type=device_code
         deviceCodeConfig(http);
@@ -91,6 +104,9 @@ public class AuthorizationServerConfig {
 
         // grant_type=password
         passwordConfig(http);
+
+        // grant_type=sms
+        smsConfig(http);
 
         return http.build();
     }
@@ -103,6 +119,19 @@ public class AuthorizationServerConfig {
                 .tokenEndpoint(endpoint ->{
                     endpoint.accessTokenRequestConverter(new OAuth2ResourceOwnerPasswordAuthenticationConverter());
                     endpoint.authenticationProvider(new OAuth2ResourceOwnerPasswordAuthenticationProvider(authenticationManager,authorizationService,tokenGenerator));
+                });
+    }
+
+    private void smsConfig(HttpSecurity http){
+        AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
+        OAuth2AuthorizationService authorizationService = http.getSharedObject(OAuth2AuthorizationService.class);
+        OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator = OAuth2ConfigurerUtils.getTokenGenerator(http);
+        StringRedisTemplate stringRedisTemplate = http.getSharedObject(StringRedisTemplate.class);
+        UserDetailsService userDetailsService = http.getSharedObject(UserDetailsService.class);
+        http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
+                .tokenEndpoint(endpoint ->{
+                    endpoint.accessTokenRequestConverter(new OAuth2SmsAuthenticationConverter());
+                    endpoint.authenticationProvider(new OAuth2SmsAuthenticationProvider(authenticationManager,authorizationService,tokenGenerator,stringRedisTemplate,userDetailsService));
                 });
     }
 
@@ -157,6 +186,7 @@ public class AuthorizationServerConfig {
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
                 .authorizationGrantType(AuthorizationGrantType.PASSWORD)
+                .authorizationGrantType(OAuth2SmsConstant.SMS)
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_JWT)
@@ -187,6 +217,7 @@ public class AuthorizationServerConfig {
                 .clientAuthenticationMethod(ClientAuthenticationMethod.NONE)
                 .authorizationGrantType(AuthorizationGrantType.DEVICE_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                .authorizationGrantType(OAuth2SmsConstant.SMS)
                 .scope("message.read")
                 .scope("message.write")
                 .build();
