@@ -8,14 +8,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.session.HttpSessionEventPublisher;
-import org.springframework.session.FindByIndexNameSessionRepository;
-import org.springframework.session.security.SpringSessionBackedSessionRegistry;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 /**
  * @author Joe Grandja
@@ -24,6 +21,7 @@ import org.springframework.session.security.SpringSessionBackedSessionRegistry;
  */
 @Slf4j
 @EnableWebSecurity
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1800)
 @Configuration(proxyBeanMethods = false)
 public class DefaultSecurityConfig{
     @Bean
@@ -59,15 +57,4 @@ public class DefaultSecurityConfig{
     private AuthenticationSuccessHandler authenticationSuccessHandler() {
         return new FederatedIdentityAuthenticationSuccessHandler();
     }
-
-//    @Bean
-    public SessionRegistry sessionRegistry(FindByIndexNameSessionRepository sessionRepository) {
-        return new SpringSessionBackedSessionRegistry(sessionRepository);
-    }
-
-    @Bean
-    public HttpSessionEventPublisher httpSessionEventPublisher() {
-        return new HttpSessionEventPublisher();
-    }
-
 }
